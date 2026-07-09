@@ -796,47 +796,124 @@ header{
   .own-aura i{animation:none}
   .tilt,.cmp-thumb,.rt-progress i,.rt-body,.cmp-row,.rt-stage,.cmp-card{transition:none}
 }
-/* трек арендаторов — глубокий премиальный изумруд */
+/* трек арендатора — светлый, динамичный, премиальный */
 .track-tenant{
-  position:relative;overflow:hidden;
+  position:relative;overflow:hidden;isolation:isolate;
   background:
-    radial-gradient(900px 520px at 88% -5%, rgba(185,138,68,.18), transparent 55%),
-    radial-gradient(760px 520px at -5% 105%, rgba(255,255,255,.06), transparent 60%),
-    linear-gradient(168deg,#11705B 0%,#0A4A3C 48%,#06352C 100%);
+    radial-gradient(760px 420px at 88% 2%, rgba(15,107,87,.12), transparent 58%),
+    radial-gradient(680px 460px at 4% 20%, rgba(185,138,68,.11), transparent 62%),
+    linear-gradient(180deg,#FBF8F1 0%,#F7F4EF 54%,#EFE8DC 100%);
 }
 .track-tenant::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent 8%,var(--brass) 50%,transparent 92%);
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.42;
+  background-image:
+    linear-gradient(rgba(15,107,87,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,107,87,.07) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:linear-gradient(to bottom,#000 0%,transparent 72%);
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 72%);
 }
 .track-tenant::after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
-  background-image:
-    linear-gradient(rgba(247,244,239,.9) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(247,244,239,.9) 1px, transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
-  -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+  content:"";position:absolute;right:-120px;top:52px;width:320px;height:320px;border-radius:50%;z-index:0;pointer-events:none;
+  border:1px solid rgba(185,138,68,.22);box-shadow:inset 0 0 0 34px rgba(255,255,255,.22);
 }
 .track-tenant .container{position:relative;z-index:1}
-.track-tenant .eyebrow{color:var(--brass)}
-.track-tenant .eyebrow::before,.track-tenant .eyebrow::after{background:var(--brass)}
-.track-tenant h2{color:var(--milk)}
-.track-tenant .track-lead{color:rgba(247,244,239,.8)}
-.track-tenant .step{
-  background:rgba(247,244,239,.055);
-  border:1px solid rgba(247,244,239,.14);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 14px 40px rgba(0,0,0,.18);
+.tenant-hero{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(300px,.98fr);gap:clamp(24px,4vw,54px);align-items:center}
+.tenant-copy h2{font-size:clamp(30px,4.2vw,48px);max-width:25ch;margin-top:14px;color:var(--ink);text-wrap:balance}
+.tenant-lead{max-width:57ch;margin-top:16px;color:#47515f;line-height:1.65}
+.track-tenant .eyebrow{color:var(--emerald)}
+.track-tenant .eyebrow::before{background:var(--brass)}
+.track-tenant .eyebrow::after{background:var(--brass)}
+.tenant-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:24px}
+.flow-pill{display:inline-flex;align-items:center;min-height:42px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid rgba(185,138,68,.28);box-shadow:0 10px 28px rgba(28,36,48,.06);font-size:14px;font-weight:700;color:var(--ink);white-space:nowrap}
+.flow-arrow{color:var(--brass);font-weight:800}
+.tenant-hero .btn{margin-top:26px}
+.tenant-card{
+  position:relative;overflow:hidden;border-radius:28px;padding:clamp(22px,3vw,32px);
+  background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,255,255,.48));
+  border:1px solid rgba(185,138,68,.24);box-shadow:0 28px 70px rgba(28,36,48,.12),inset 0 1px 0 rgba(255,255,255,.78);
 }
-.track-tenant .step h3{color:var(--milk)}
-.track-tenant .step p{color:rgba(247,244,239,.78)}
-.track-tenant .step-key{background:rgba(185,138,68,.16);color:#D9B26E}
-.track-tenant .btn-solid{
-  background:linear-gradient(135deg,#CBA05C,#B98A44);
-  color:#231A0C;border-color:transparent;
-  box-shadow:0 12px 32px rgba(185,138,68,.35);
+.tenant-card::before{content:"";position:absolute;inset:auto -40px -70px auto;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(15,107,87,.16),transparent 68%)}
+.tenant-card>*{position:relative;z-index:1}
+.tenant-stage{
+  --stage-accent:var(--emerald);
+  min-height:470px;padding:22px;display:flex;flex-direction:column;gap:16px;
+  background:rgba(255,255,255,.68);backdrop-filter:blur(18px) saturate(1.12);-webkit-backdrop-filter:blur(18px) saturate(1.12);
 }
-.track-tenant .btn-solid:hover{background:linear-gradient(135deg,#D9B26E,#C39750);border-color:transparent}
+.tenant-stage::after{content:"";position:absolute;inset:1px;border-radius:27px;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.72),transparent 42%)}
+.ts-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.ts-kicker{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:800;margin-bottom:5px}
+.ts-title{font-size:20px;font-weight:800;line-height:1.18;color:var(--ink)}
+.ts-status{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:7px 10px;border-radius:999px;background:rgba(15,107,87,.08);border:1px solid rgba(15,107,87,.12);color:var(--emerald);font-size:12px;font-weight:800;white-space:nowrap}
+.ts-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 5px rgba(15,107,87,.1)}
+.tenant-stage.ts-changing .ts-title,.tenant-stage.ts-changing .ts-status{animation:tsTextIn .42s cubic-bezier(.2,.8,.25,1)}
+@keyframes tsTextIn{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ts-progress{height:4px;border-radius:999px;background:rgba(15,107,87,.09);overflow:hidden;flex:none}
+.ts-progress i{display:block;height:100%;width:16.666%;border-radius:inherit;background:linear-gradient(90deg,var(--emerald),#55B093);transition:width .55s cubic-bezier(.2,.8,.25,1)}
+.tenant-stage[data-step="2"] .ts-progress i{width:33.333%}.tenant-stage[data-step="3"] .ts-progress i{width:50%}.tenant-stage[data-step="4"] .ts-progress i{width:66.666%}.tenant-stage[data-step="5"] .ts-progress i{width:83.333%}.tenant-stage[data-step="6"] .ts-progress i{width:100%}
+.ts-screen{position:relative;flex:1;min-height:310px;overflow:hidden;border-radius:22px;background:rgba(247,244,239,.54);border:1px solid rgba(221,214,203,.72)}
+.ts-panel{position:absolute;inset:0;padding:18px;display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(14px) scale(.985);pointer-events:none;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.25,1)}
+.tenant-stage[data-step="1"] .ts-panel[data-panel="1"],.tenant-stage[data-step="2"] .ts-panel[data-panel="2"],.tenant-stage[data-step="3"] .ts-panel[data-panel="3"],.tenant-stage[data-step="4"] .ts-panel[data-panel="4"],.tenant-stage[data-step="5"] .ts-panel[data-panel="5"],.tenant-stage[data-step="6"] .ts-panel[data-panel="6"]{opacity:1;transform:none;pointer-events:auto}
+.ts-query{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ts-chip{padding:12px;border-radius:16px;background:rgba(255,255,255,.82);border:1px solid rgba(221,214,203,.78);box-shadow:0 10px 28px rgba(28,36,48,.05)}
+.ts-chip span{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7a8490;font-weight:700;margin-bottom:2px}.ts-chip b{font-size:15px;color:var(--ink)}
+.ts-reply{margin-top:auto;padding:14px 16px;border-radius:18px;background:#fff;border:1px solid rgba(185,138,68,.24);box-shadow:0 16px 34px rgba(28,36,48,.07);color:#3f4a57;font-size:14.5px;line-height:1.45}
+.ts-reply::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brass);margin-right:8px}
+.ts-flat-list{display:grid;gap:10px}.ts-flat{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:12px;border-radius:18px;background:rgba(255,255,255,.82);border:1px solid rgba(221,214,203,.75);box-shadow:0 14px 28px rgba(28,36,48,.05);transition:opacity .45s ease,transform .45s ease}.ts-flat:nth-child(1){transition-delay:.08s}.ts-flat:nth-child(2){transition-delay:.22s}.ts-flat:nth-child(3){transition-delay:.36s}.tenant-stage[data-sub="reject"] .ts-flat.is-out{opacity:.22;transform:translateX(18px) scale(.98)}.tenant-stage[data-sub="reject"] .ts-flat.is-fit{border-color:rgba(15,107,87,.28);box-shadow:0 16px 34px rgba(15,107,87,.08)}
+.ts-photo{height:44px;border-radius:13px;background:linear-gradient(135deg,rgba(15,107,87,.18),rgba(185,138,68,.18))}.ts-flat b{display:block;font-size:14.5px;color:var(--ink);line-height:1.2}.ts-flat span{font-size:12.5px;color:#6b7280}.ts-mark{font-size:12px;font-weight:800;color:var(--emerald);background:rgba(15,107,87,.09);border-radius:999px;padding:6px 8px;white-space:nowrap}
+.ts-terms{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ts-term{padding:14px;border-radius:16px;background:#fff;border:1px solid rgba(221,214,203,.78)}.ts-term span{display:block;font-size:12px;color:#7a8490;margin-bottom:2px}.ts-term b{font-size:16px;color:var(--ink)}.ts-note{margin-top:auto;font-size:14px;line-height:1.45;color:#4b5563;background:rgba(15,107,87,.07);border:1px solid rgba(15,107,87,.12);border-radius:16px;padding:12px 14px}
+.ts-route{display:grid;gap:12px;margin:auto 0}.ts-route-row{display:grid;grid-template-columns:62px 1fr;gap:12px;align-items:center;padding:14px;border-radius:18px;background:#fff;border:1px solid rgba(221,214,203,.78);box-shadow:0 12px 26px rgba(28,36,48,.05)}.ts-route-row time{font-size:15px;font-weight:800;color:var(--brass);font-variant-numeric:tabular-nums}.ts-route-row span{font-weight:700;color:var(--ink)}
+.ts-checks{display:grid;gap:10px;margin:auto 0}.ts-check{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:#fff;border:1px solid rgba(221,214,203,.78);font-size:14.5px;color:#3f4a57}.ts-check i{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,107,87,.1);color:var(--emerald);font-style:normal;font-weight:900;flex:none}.ts-final{margin:auto 0;display:grid;gap:12px}.ts-final .ts-check{font-weight:700}.ts-keyline{height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent);margin:2px 0}.ts-finale{font-size:15px;line-height:1.45;color:var(--ink);font-weight:700;text-align:center;padding:12px;border-radius:16px;background:rgba(185,138,68,.1);border:1px solid rgba(185,138,68,.22)}
+.ts-controls{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ts-nav{width:36px;height:36px;border-radius:50%;border:1px solid rgba(15,107,87,.14);background:rgba(255,255,255,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(28,36,48,.08);transition:transform .2s,background .2s,border-color .2s,color .2s}
+.ts-nav:hover,.ts-nav:focus-visible{background:rgba(15,107,87,.08);border-color:rgba(15,107,87,.28);color:var(--emerald);outline:none;transform:translateY(-1px)}
+.ts-nav:active{transform:scale(.96)}
+.ts-dots{display:flex;gap:7px;justify-content:center;align-items:center}.ts-dot{width:8px;height:8px;border-radius:50%;border:0;background:rgba(15,107,87,.18);padding:0;cursor:pointer;transition:width .25s,background .25s,box-shadow .25s}.tenant-stage[data-step="1"] .ts-dot:nth-child(1),.tenant-stage[data-step="2"] .ts-dot:nth-child(2),.tenant-stage[data-step="3"] .ts-dot:nth-child(3),.tenant-stage[data-step="4"] .ts-dot:nth-child(4),.tenant-stage[data-step="5"] .ts-dot:nth-child(5),.tenant-stage[data-step="6"] .ts-dot:nth-child(6){width:24px;border-radius:999px;background:var(--emerald);box-shadow:0 0 0 4px rgba(15,107,87,.1)}
+.tenant-section{margin-top:clamp(42px,6vw,72px)}
+.tenant-head{margin-bottom:22px;text-align:center}
+.tenant-head h3{font-size:clamp(24px,3vw,34px);color:var(--ink);text-wrap:balance}
+.tenant-head p{max-width:58ch;margin:10px auto 0;color:#5a6573;font-size:16px}
+.tenant-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.t-benefit{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.t-benefit:hover{transform:translateY(-4px);border-color:rgba(15,107,87,.28);box-shadow:0 22px 54px rgba(28,36,48,.13)}
+.t-ico{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(15,107,87,.12),rgba(185,138,68,.12));color:var(--emerald);margin-bottom:14px}
+.t-benefit h3{font-size:18px;color:var(--ink);margin-bottom:8px}
+.t-benefit p{font-size:15px;line-height:1.55;color:#5a6573}
+.tenant-path{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:tpath}
+.path-step{position:relative;padding:18px 14px;min-height:132px}
+.path-step::after{content:"";position:absolute;top:36px;right:-11px;width:12px;height:2px;background:rgba(185,138,68,.45)}
+.path-step:last-child::after{display:none}
+.path-num{display:block;font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--brass);margin-bottom:24px}
+.path-step h3{font-size:16px;color:var(--ink);line-height:1.25}
+.tenant-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tcmp{padding:clamp(20px,2.6vw,28px)}
+.tcmp h3{font-size:22px;margin-bottom:14px;color:var(--ink)}
+.tcmp ul{list-style:none;display:grid;gap:11px}
+.tcmp li{position:relative;padding-left:24px;font-size:15px;line-height:1.45;color:#515c69}
+.tcmp li::before{content:"—";position:absolute;left:0;color:var(--brass);font-weight:800}
+.tcmp-good{border-color:rgba(15,107,87,.26);background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(231,244,239,.72))}
+.tcmp-good h3{color:var(--emerald)}
+.tcmp-good li::before{content:"✓";color:var(--emerald)}
+.tenant-final{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;padding:clamp(28px,4vw,44px);background:linear-gradient(135deg,rgba(15,107,87,.95),rgba(11,84,69,.95));border-color:rgba(255,255,255,.2)}
+.tenant-final h3{max-width:29ch;color:#fff;font-size:clamp(24px,3.3vw,36px);text-wrap:balance}
+.tenant-final .btn{background:linear-gradient(135deg,#D9B26E,#B98A44);color:#231A0C;border-color:transparent;margin-top:4px}
+.tenant-final span{font-size:13px;color:rgba(247,244,239,.75)}
+@media(max-width:819px){
+  .track-tenant{padding:52px 0}
+  .tenant-hero{grid-template-columns:1fr;gap:22px}
+  .tenant-copy{text-align:center}.tenant-copy h2{max-width:none}.tenant-lead{margin-left:auto;margin-right:auto}
+  .tenant-flow{justify-content:center}.tenant-card{border-radius:24px}.tenant-stage{min-height:440px}
+  .tenant-benefits{grid-template-columns:1fr}.tenant-path{grid-template-columns:1fr 1fr}.path-step::after{display:none}.tenant-compare{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .track-tenant{padding:44px 0}.tenant-copy h2{font-size:clamp(27px,7.4vw,34px);line-height:1.08}.tenant-lead{font-size:15px;line-height:1.55}
+  .tenant-flow{display:grid;grid-template-columns:1fr;gap:8px}.flow-pill{justify-content:center;white-space:normal;text-align:center}.flow-arrow{display:none}
+  .tenant-hero .btn,.tenant-final .btn{width:100%;justify-content:center}.tenant-card{padding:18px;border-radius:22px}.tenant-stage{min-height:432px;padding:14px}.ts-head{gap:10px}.ts-title{font-size:17px}.ts-status{font-size:11px;padding:6px 8px;white-space:normal;text-align:left}.ts-screen{min-height:298px;border-radius:18px}.ts-panel{padding:12px;gap:10px}.ts-query,.ts-terms{grid-template-columns:1fr}.ts-chip,.ts-term{padding:10px}.ts-flat{grid-template-columns:40px 1fr;gap:9px;padding:10px}.ts-mark{grid-column:2;justify-self:start}.ts-photo{height:38px}.ts-route-row{grid-template-columns:54px 1fr;padding:11px}.ts-check{padding:10px;font-size:13.5px}.ts-nav{width:34px;height:34px}
+  .tenant-section{margin-top:38px}.tenant-head{text-align:left}.tenant-head h3{font-size:24px}.tenant-head p{font-size:15px}
+  .t-benefit{padding:18px}.tenant-path{grid-template-columns:1fr}.path-step{min-height:auto;padding:18px}.path-num{margin-bottom:12px}
+  .tcmp{padding:20px 18px}.tenant-final{padding:26px 18px}.tenant-final h3{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){.t-benefit,.ts-progress i,.ts-panel,.ts-flat,.ts-dot,.ts-nav{transition:none}.tenant-stage.ts-changing .ts-title,.tenant-stage.ts-changing .ts-status{animation:none}}
 /* два пространства: переключатель */
 .spaces-bar{padding:34px 0 6px;position:sticky;top:112px;z-index:40}
 .mode-switch{
@@ -1280,29 +1357,162 @@ footer .caption{color:#6b7280}
 <!-- ТРЕК: СНЯТЬ -->
 <section class="track track-tenant space" id="tenant">
   <div class="container">
-    <div class="track-head rv">
-      <span class="eyebrow">Арендаторам</span>
-      <h2>Квартира под ваш запрос — без 20 бессмысленных просмотров</h2>
-      <p class="track-lead">Вы описываете, что нужно. Я отсеиваю слабые и сомнительные варианты, договариваюсь о просмотре и проверяю условия до встречи.</p>
+
+    <div class="tenant-hero rv">
+      <div class="tenant-copy">
+        <span class="eyebrow">Я арендатор</span>
+        <h2>Не листать сотни объявлений. Найти квартиру, в которую хочется заехать</h2>
+        <p class="tenant-lead">Вы рассказываете, какую квартиру ищете. Я уточняю детали, проверяю варианты, договариваюсь о показах и сопровождаю до получения ключей.</p>
+        <div class="tenant-flow" aria-label="Путь от запроса до ключей">
+          <span class="flow-pill">Один запрос</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">Отобранные варианты</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">Договор</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">Ключи</span>
+        </div>
+        <a class="btn btn-solid" href="#contact" data-goal="tenant">Подобрать квартиру</a>
+      </div>
+      <div class="tenant-card tenant-stage" id="tenantStage" data-step="1" tabindex="0" aria-label="Анимированная сцена подбора квартиры" aria-live="polite">
+        <div class="ts-head">
+          <div><span class="ts-kicker">Подбор под ключ</span><div class="ts-title" id="tsTitle">Заявка получена</div></div>
+          <span class="ts-status" id="tsStatus">Получил ваш запрос</span>
+        </div>
+        <div class="ts-progress" aria-hidden="true"><i id="tsProgress"></i></div>
+        <div class="ts-screen">
+          <div class="ts-panel" data-panel="1">
+            <div class="ts-query">
+              <div class="ts-chip"><span>Город</span><b>Москва</b></div>
+              <div class="ts-chip"><span>Бюджет</span><b>до 120 000 ₽</b></div>
+              <div class="ts-chip"><span>Формат</span><b>светлая 2-комнатная</b></div>
+              <div class="ts-chip"><span>Локация</span><b>рядом с метро</b></div>
+            </div>
+            <div class="ts-reply">Уточняю район, сроки, состав жильцов и важные пожелания</div>
+          </div>
+          <div class="ts-panel" data-panel="2">
+            <div class="ts-flat-list">
+              <div class="ts-flat is-fit"><div class="ts-photo"></div><div><b>Хамовники</b><span>2 комнаты · 118 000 ₽</span></div><span class="ts-mark">подходит</span></div>
+              <div class="ts-flat is-out"><div class="ts-photo"></div><div><b>Павелецкая</b><span>фото не совпали</span></div><span class="ts-mark">отсеяно</span></div>
+              <div class="ts-flat is-fit"><div class="ts-photo"></div><div><b>Пресня</b><span>2 комнаты · 120 000 ₽</span></div><span class="ts-mark">подходит</span></div>
+            </div>
+          </div>
+          <div class="ts-panel" data-panel="3">
+            <div class="ts-terms">
+              <div class="ts-term"><span>Стоимость</span><b>120 000 ₽</b></div>
+              <div class="ts-term"><span>Депозит</span><b>1 месяц</b></div>
+              <div class="ts-term"><span>Комиссия</span><b>согласована заранее</b></div>
+              <div class="ts-term"><span>Дата заезда</span><b>15 августа</b></div>
+            </div>
+            <div class="ts-note">Все условия известны до показа. Без неожиданных платежей</div>
+          </div>
+          <div class="ts-panel" data-panel="4">
+            <div class="ts-route">
+              <div class="ts-route-row"><time>12:00</time><span>Хамовники</span></div>
+              <div class="ts-route-row"><time>13:30</time><span>Пресня</span></div>
+              <div class="ts-route-row"><time>15:00</time><span>Хорошёвский</span></div>
+            </div>
+          </div>
+          <div class="ts-panel" data-panel="5">
+            <div class="ts-checks">
+              <div class="ts-check"><i>✓</i><span>собственник и документы</span></div>
+              <div class="ts-check"><i>✓</i><span>условия аренды</span></div>
+              <div class="ts-check"><i>✓</i><span>спорные пункты договора</span></div>
+              <div class="ts-check"><i>✓</i><span>состояние квартиры</span></div>
+            </div>
+            <div class="ts-note">До подписания объясняю каждый важный пункт</div>
+          </div>
+          <div class="ts-panel" data-panel="6">
+            <div class="ts-final">
+              <div class="ts-check"><i>✓</i><span>договор согласован</span></div>
+              <div class="ts-check"><i>✓</i><span>квартира принята</span></div>
+              <div class="ts-check"><i>✓</i><span>ключи получены</span></div>
+              <div class="ts-keyline" aria-hidden="true"></div>
+              <div class="ts-finale">Сопровождаю до момента, когда ключи уже у вас</div>
+            </div>
+          </div>
+        </div>
+        <div class="ts-controls">
+          <button class="ts-nav ts-prev" type="button" aria-label="Предыдущий этап">←</button>
+          <div class="ts-dots" role="tablist" aria-label="Этапы подбора квартиры">
+            <button class="ts-dot" role="tab" type="button" data-step-target="1" aria-label="Этап 1: Заявка получена"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="2" aria-label="Этап 2: Формирую подборку"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="3" aria-label="Этап 3: Согласовываю условия"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="4" aria-label="Этап 4: Организую показы"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="5" aria-label="Этап 5: Проверяю квартиру и документы"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="6" aria-label="Этап 6: Договор и ключи"></button>
+          </div>
+          <button class="ts-nav ts-next" type="button" aria-label="Следующий этап">→</button>
+        </div>
+      </div>
     </div>
-    <div class="steps">
-      <div class="step rv">
-        <div class="step-key"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <h3>1. Запрос, а не «посмотрим»</h3>
-        <p>Район, бюджет, сроки, животные, парковка — фиксирую всё. Ищу под ваш список и сразу отсеиваю варианты с плохими условиями.</p>
+
+    <div class="tenant-section rv">
+      <div class="tenant-head">
+        <h3>Поиск квартиры без лишних рисков</h3>
       </div>
-      <div class="step rv">
-        <div class="step-key"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16v13H4V7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 7V4h8v3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 13.5 2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>2. 3–4 реальных варианта</h3>
-        <p>Не 20 «хламовников» с приукрашенных фото. Каждый вариант я проверил до показа и заранее обсуждаю условия с собственником.</p>
-      </div>
-      <div class="step rv">
-        <div class="step-key"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="9" r="3.5" stroke="currentColor" stroke-width="1.8"/><path d="M11.5 9H20l-2 2m-2-2 2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M2.5 19c1-3 3.2-4.5 5.5-4.5S12.5 16 13.5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <h3>3. Чистая сделка и ключи</h3>
-        <p>Проверяю собственника и документы, разбираю договор, помогаю в переговорах и сопровождаю вас до заселения.</p>
+      <div class="tenant-benefits">
+        <div class="tenant-card t-benefit">
+          <div class="t-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Без фейков и пустых поездок</h3>
+          <p>Я проверю объявления, собственников и актуальность до показа.</p>
+        </div>
+        <div class="tenant-card t-benefit">
+          <div class="t-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Без хаоса в переписках</h3>
+          <p>Я сам свяжусь, уточню условия и соберу варианты в понятную подборку.</p>
+        </div>
+        <div class="tenant-card t-benefit">
+          <div class="t-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l3 3v15H7V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 13h5M10 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Без сюрпризов в договоре</h3>
+          <p>Я проверю условия, документы и спорные пункты до подписания.</p>
+        </div>
       </div>
     </div>
-    <a class="btn btn-solid rv" href="#contact" data-goal="tenant">Оставить запрос</a>
+
+    <div class="tenant-section rv">
+      <div class="tenant-head">
+        <h3>Путь арендатора</h3>
+      </div>
+      <div class="tenant-path">
+        <div class="tenant-card path-step"><span class="path-num">01</span><h3>Короткий бриф</h3></div>
+        <div class="tenant-card path-step"><span class="path-num">02</span><h3>Подбор квартир</h3></div>
+        <div class="tenant-card path-step"><span class="path-num">03</span><h3>Согласование и показы</h3></div>
+        <div class="tenant-card path-step"><span class="path-num">04</span><h3>Проверка условий и документов</h3></div>
+        <div class="tenant-card path-step"><span class="path-num">05</span><h3>Договор и ключи</h3></div>
+      </div>
+    </div>
+
+    <div class="tenant-section rv">
+      <div class="tenant-compare">
+        <div class="tenant-card tcmp">
+          <h3>Искать самому</h3>
+          <ul>
+            <li>десятки чатов;</li>
+            <li>неактуальные объявления;</li>
+            <li>одинаковые квартиры под разными адресами;</li>
+            <li>трата времени на звонки;</li>
+            <li>риск пропустить важное в договоре.</li>
+          </ul>
+        </div>
+        <div class="tenant-card tcmp tcmp-good">
+          <h3>Со мной</h3>
+          <ul>
+            <li>одна точка контакта;</li>
+            <li>только проверенные варианты;</li>
+            <li>показы по понятному маршруту;</li>
+            <li>переговоры и сопровождение;</li>
+            <li>помощь до получения ключей.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tenant-section rv">
+      <div class="tenant-card tenant-final">
+        <h3>Расскажите, какую квартиру ищете. Остальное я возьму на себя</h3>
+        <a class="btn" href="#contact" data-goal="tenant">Начать подбор</a>
+        <span>Отвечу лично. Без передачи менеджерам.</span>
+      </div>
+    </div>
+
   </div>
 </section>
 </div><!-- /spaces-zone -->
@@ -1599,6 +1809,108 @@ document.querySelectorAll('[data-goal]').forEach(btn => {
     if (r) r.checked = true;
   });
 });
+
+/* Hero-сцена арендатора: автоматический цикл + ручное управление */
+(function(){
+  const stage = document.getElementById('tenantStage');
+  if (!stage) return;
+  const title = document.getElementById('tsTitle');
+  const status = document.getElementById('tsStatus');
+  const screen = stage.querySelector('.ts-screen');
+  const prev = stage.querySelector('.ts-prev');
+  const nextBtn = stage.querySelector('.ts-next');
+  const dots = Array.from(stage.querySelectorAll('.ts-dot'));
+  if (!title || !status || !screen || !prev || !nextBtn || dots.length !== 6) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const intervalMs = 3300;
+  const resumeDelayMs = 5000;
+  const steps = [
+    ['Заявка получена', 'Получил ваш запрос'],
+    ['Формирую подборку', 'Отсеиваю неподходящие варианты'],
+    ['Согласовываю условия', 'Все условия известны заранее'],
+    ['Организую показы', 'Собираю показы в один удобный маршрут'],
+    ['Проверяю квартиру и документы', 'Проверяю важные детали'],
+    ['Договор и ключи', 'Сопровождаю до получения ключей']
+  ];
+  let idx = 0;
+  let timer = null;
+  let resumeTimer = null;
+  let hoverPaused = false;
+  let hiddenPaused = document.hidden;
+  let pointerStart = null;
+
+  function stopTimer(){
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+  function clearResume(){
+    if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
+  }
+  function canAuto(){ return !reduce && !hoverPaused && !hiddenPaused; }
+  function startTimer(){
+    stopTimer();
+    if (canAuto()) timer = setInterval(() => setStep(idx + 1), intervalMs);
+  }
+  function scheduleResume(){
+    clearResume();
+    stopTimer();
+    if (!reduce) resumeTimer = setTimeout(startTimer, resumeDelayMs);
+  }
+  function setStep(nextIndex, manual){
+    idx = (nextIndex + steps.length) % steps.length;
+    const stepNumber = idx + 1;
+    stage.classList.remove('ts-changing');
+    void stage.offsetWidth;
+    stage.classList.add('ts-changing');
+    stage.dataset.step = String(stepNumber);
+    stage.dataset.sub = stepNumber === 2 ? 'reject' : '';
+    title.textContent = steps[idx][0];
+    status.textContent = steps[idx][1];
+    dots.forEach((dot, i) => {
+      const active = i === idx;
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      dot.tabIndex = active ? 0 : -1;
+    });
+    window.setTimeout(() => stage.classList.remove('ts-changing'), 420);
+    if (manual) scheduleResume();
+  }
+  function go(delta, manual){ setStep(idx + delta, manual); }
+
+  prev.addEventListener('click', () => go(-1, true));
+  nextBtn.addEventListener('click', () => go(1, true));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => setStep(i, true)));
+  stage.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1, true); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1, true); }
+  });
+
+  screen.addEventListener('mouseenter', () => { hoverPaused = true; stopTimer(); clearResume(); });
+  screen.addEventListener('mouseleave', () => { hoverPaused = false; startTimer(); });
+
+  screen.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse') return;
+    pointerStart = {x:e.clientX, y:e.clientY, id:e.pointerId};
+  });
+  screen.addEventListener('pointerup', e => {
+    if (!pointerStart || pointerStart.id !== e.pointerId) return;
+    const dx = e.clientX - pointerStart.x;
+    const dy = e.clientY - pointerStart.y;
+    pointerStart = null;
+    if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.35) {
+      go(dx < 0 ? 1 : -1, true);
+    }
+  });
+  screen.addEventListener('pointercancel', () => { pointerStart = null; });
+
+  document.addEventListener('visibilitychange', () => {
+    hiddenPaused = document.hidden;
+    if (hiddenPaused) { stopTimer(); clearResume(); }
+    else startTimer();
+  });
+
+  setStep(0, false);
+  startTimer();
+})();
 
 /* ====== ИНТРО: VAPORIZE TEXT (адаптация 21st) ====== */
 (function(){
