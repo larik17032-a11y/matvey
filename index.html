@@ -796,47 +796,98 @@ header{
   .own-aura i{animation:none}
   .tilt,.cmp-thumb,.rt-progress i,.rt-body,.cmp-row,.rt-stage,.cmp-card{transition:none}
 }
-/* трек арендаторов — глубокий премиальный изумруд */
+/* трек арендатора — светлый, динамичный, премиальный */
 .track-tenant{
-  position:relative;overflow:hidden;
+  position:relative;overflow:hidden;isolation:isolate;
   background:
-    radial-gradient(900px 520px at 88% -5%, rgba(185,138,68,.18), transparent 55%),
-    radial-gradient(760px 520px at -5% 105%, rgba(255,255,255,.06), transparent 60%),
-    linear-gradient(168deg,#11705B 0%,#0A4A3C 48%,#06352C 100%);
+    radial-gradient(760px 420px at 88% 2%, rgba(15,107,87,.12), transparent 58%),
+    radial-gradient(680px 460px at 4% 20%, rgba(185,138,68,.11), transparent 62%),
+    linear-gradient(180deg,#FBF8F1 0%,#F7F4EF 54%,#EFE8DC 100%);
 }
 .track-tenant::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent 8%,var(--brass) 50%,transparent 92%);
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.42;
+  background-image:
+    linear-gradient(rgba(15,107,87,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15,107,87,.07) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:linear-gradient(to bottom,#000 0%,transparent 72%);
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,transparent 72%);
 }
 .track-tenant::after{
-  content:"";position:absolute;inset:0;pointer-events:none;opacity:.05;
-  background-image:
-    linear-gradient(rgba(247,244,239,.9) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(247,244,239,.9) 1px, transparent 1px);
-  background-size:72px 72px;
-  mask-image:radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
-  -webkit-mask-image:radial-gradient(120% 90% at 50% 0%, #000 30%, transparent 78%);
+  content:"";position:absolute;right:-120px;top:52px;width:320px;height:320px;border-radius:50%;z-index:0;pointer-events:none;
+  border:1px solid rgba(185,138,68,.22);box-shadow:inset 0 0 0 34px rgba(255,255,255,.22);
 }
 .track-tenant .container{position:relative;z-index:1}
-.track-tenant .eyebrow{color:var(--brass)}
-.track-tenant .eyebrow::before,.track-tenant .eyebrow::after{background:var(--brass)}
-.track-tenant h2{color:var(--milk)}
-.track-tenant .track-lead{color:rgba(247,244,239,.8)}
-.track-tenant .step{
-  background:rgba(247,244,239,.055);
-  border:1px solid rgba(247,244,239,.14);
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 14px 40px rgba(0,0,0,.18);
+.tenant-hero{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(300px,.98fr);gap:clamp(24px,4vw,54px);align-items:center}
+.tenant-copy h2{font-size:clamp(30px,4.2vw,48px);max-width:25ch;margin-top:14px;color:var(--ink);text-wrap:balance}
+.tenant-lead{max-width:57ch;margin-top:16px;color:#47515f;line-height:1.65}
+.track-tenant .eyebrow{color:var(--emerald)}
+.track-tenant .eyebrow::before{background:var(--brass)}
+.track-tenant .eyebrow::after{background:var(--brass)}
+.tenant-flow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:24px}
+.flow-pill{display:inline-flex;align-items:center;min-height:42px;padding:10px 14px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid rgba(185,138,68,.28);box-shadow:0 10px 28px rgba(28,36,48,.06);font-size:14px;font-weight:700;color:var(--ink);white-space:nowrap}
+.flow-arrow{color:var(--brass);font-weight:800}
+.tenant-hero .btn{margin-top:26px}
+.tenant-card{
+  position:relative;overflow:hidden;border-radius:28px;padding:clamp(22px,3vw,32px);
+  background:linear-gradient(145deg,rgba(255,255,255,.82),rgba(255,255,255,.48));
+  border:1px solid rgba(185,138,68,.24);box-shadow:0 28px 70px rgba(28,36,48,.12),inset 0 1px 0 rgba(255,255,255,.78);
 }
-.track-tenant .step h3{color:var(--milk)}
-.track-tenant .step p{color:rgba(247,244,239,.78)}
-.track-tenant .step-key{background:rgba(185,138,68,.16);color:#D9B26E}
-.track-tenant .btn-solid{
-  background:linear-gradient(135deg,#CBA05C,#B98A44);
-  color:#231A0C;border-color:transparent;
-  box-shadow:0 12px 32px rgba(185,138,68,.35);
+.tenant-card::before{content:"";position:absolute;inset:auto -40px -70px auto;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(15,107,87,.16),transparent 68%)}
+.tenant-card>*{position:relative;z-index:1}
+.search-widget{display:grid;gap:14px}
+.sw-top{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.sw-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:800}
+.sw-badge{font-size:13px;font-weight:800;color:var(--emerald);background:rgba(15,107,87,.08);padding:8px 10px;border-radius:999px}
+.sw-query{padding:16px;border-radius:18px;background:#fff;border:1px solid var(--sand);font-weight:700;color:var(--ink);box-shadow:0 10px 28px rgba(28,36,48,.06)}
+.sw-stack{display:grid;gap:10px}
+.sw-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(247,244,239,.72);border:1px solid rgba(221,214,203,.8);color:#47515f;font-size:14px}
+.sw-row i{width:9px;height:9px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 4px rgba(15,107,87,.1);flex:none}
+.tenant-section{margin-top:clamp(42px,6vw,72px)}
+.tenant-head{margin-bottom:22px;text-align:center}
+.tenant-head h3{font-size:clamp(24px,3vw,34px);color:var(--ink);text-wrap:balance}
+.tenant-head p{max-width:58ch;margin:10px auto 0;color:#5a6573;font-size:16px}
+.tenant-benefits{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.t-benefit{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.t-benefit:hover{transform:translateY(-4px);border-color:rgba(15,107,87,.28);box-shadow:0 22px 54px rgba(28,36,48,.13)}
+.t-ico{width:42px;height:42px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,rgba(15,107,87,.12),rgba(185,138,68,.12));color:var(--emerald);margin-bottom:14px}
+.t-benefit h3{font-size:18px;color:var(--ink);margin-bottom:8px}
+.t-benefit p{font-size:15px;line-height:1.55;color:#5a6573}
+.tenant-path{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:tpath}
+.path-step{position:relative;padding:18px 14px;min-height:132px}
+.path-step::after{content:"";position:absolute;top:36px;right:-11px;width:12px;height:2px;background:rgba(185,138,68,.45)}
+.path-step:last-child::after{display:none}
+.path-num{display:block;font-size:13px;font-weight:800;letter-spacing:.12em;color:var(--brass);margin-bottom:24px}
+.path-step h3{font-size:16px;color:var(--ink);line-height:1.25}
+.tenant-compare{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.tcmp{padding:clamp(20px,2.6vw,28px)}
+.tcmp h3{font-size:22px;margin-bottom:14px;color:var(--ink)}
+.tcmp ul{list-style:none;display:grid;gap:11px}
+.tcmp li{position:relative;padding-left:24px;font-size:15px;line-height:1.45;color:#515c69}
+.tcmp li::before{content:"—";position:absolute;left:0;color:var(--brass);font-weight:800}
+.tcmp-good{border-color:rgba(15,107,87,.26);background:linear-gradient(145deg,rgba(255,255,255,.9),rgba(231,244,239,.72))}
+.tcmp-good h3{color:var(--emerald)}
+.tcmp-good li::before{content:"✓";color:var(--emerald)}
+.tenant-final{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;padding:clamp(28px,4vw,44px);background:linear-gradient(135deg,rgba(15,107,87,.95),rgba(11,84,69,.95));border-color:rgba(255,255,255,.2)}
+.tenant-final h3{max-width:29ch;color:#fff;font-size:clamp(24px,3.3vw,36px);text-wrap:balance}
+.tenant-final .btn{background:linear-gradient(135deg,#D9B26E,#B98A44);color:#231A0C;border-color:transparent;margin-top:4px}
+.tenant-final span{font-size:13px;color:rgba(247,244,239,.75)}
+@media(max-width:819px){
+  .track-tenant{padding:52px 0}
+  .tenant-hero{grid-template-columns:1fr;gap:22px}
+  .tenant-copy{text-align:center}.tenant-copy h2{max-width:none}.tenant-lead{margin-left:auto;margin-right:auto}
+  .tenant-flow{justify-content:center}.tenant-card{border-radius:24px}
+  .tenant-benefits{grid-template-columns:1fr}.tenant-path{grid-template-columns:1fr 1fr}.path-step::after{display:none}.tenant-compare{grid-template-columns:1fr}
 }
-.track-tenant .btn-solid:hover{background:linear-gradient(135deg,#D9B26E,#C39750);border-color:transparent}
+@media(max-width:600px){
+  .track-tenant{padding:44px 0}.tenant-copy h2{font-size:clamp(27px,7.4vw,34px);line-height:1.08}.tenant-lead{font-size:15px;line-height:1.55}
+  .tenant-flow{display:grid;grid-template-columns:1fr;gap:8px}.flow-pill{justify-content:center;white-space:normal;text-align:center}.flow-arrow{display:none}
+  .tenant-hero .btn,.tenant-final .btn{width:100%;justify-content:center}.tenant-card{padding:18px;border-radius:22px}.sw-top{align-items:flex-start}.sw-query{font-size:15px}
+  .tenant-section{margin-top:38px}.tenant-head{text-align:left}.tenant-head h3{font-size:24px}.tenant-head p{font-size:15px}
+  .t-benefit{padding:18px}.tenant-path{grid-template-columns:1fr}.path-step{min-height:auto;padding:18px}.path-num{margin-bottom:12px}
+  .tcmp{padding:20px 18px}.tenant-final{padding:26px 18px}.tenant-final h3{font-size:24px}
+}
+@media (prefers-reduced-motion:reduce){.t-benefit{transition:none}}
 /* два пространства: переключатель */
 .spaces-bar{padding:34px 0 6px;position:sticky;top:112px;z-index:40}
 .mode-switch{
@@ -1280,29 +1331,101 @@ footer .caption{color:#6b7280}
 <!-- ТРЕК: СНЯТЬ -->
 <section class="track track-tenant space" id="tenant">
   <div class="container">
-    <div class="track-head rv">
-      <span class="eyebrow">Арендаторам</span>
-      <h2>Квартира под ваш запрос — без 20 бессмысленных просмотров</h2>
-      <p class="track-lead">Вы описываете, что нужно. Я отсеиваю слабые и сомнительные варианты, договариваюсь о просмотре и проверяю условия до встречи.</p>
+
+    <div class="tenant-hero rv">
+      <div class="tenant-copy">
+        <span class="eyebrow">Я арендатор</span>
+        <h2>Не листать сотни объявлений. Найти квартиру, в которую хочется заехать</h2>
+        <p class="tenant-lead">Вы говорите бюджет, район и пожелания. Матвей берёт поиск, переговоры, проверки и показы на себя.</p>
+        <div class="tenant-flow" aria-label="Путь от запроса до ключей">
+          <span class="flow-pill">Один запрос</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">Отобранные варианты</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">Договор</span><span class="flow-arrow">→</span>
+          <span class="flow-pill">Ключи</span>
+        </div>
+        <a class="btn btn-solid" href="#contact" data-goal="tenant">Подобрать квартиру</a>
+      </div>
+      <div class="tenant-card search-widget tilt">
+        <span class="spot" aria-hidden="true"></span>
+        <div class="sw-top"><span class="sw-label">Подбор под ключ</span><span class="sw-badge">без хаоса</span></div>
+        <div class="sw-query">Москва · до 120 000 ₽ · светлая 2-комнатная · рядом с метро</div>
+        <div class="sw-stack">
+          <div class="sw-row"><i></i><span>Проверить актуальность и собственника до показа</span></div>
+          <div class="sw-row"><i></i><span>Собрать варианты в короткую понятную подборку</span></div>
+          <div class="sw-row"><i></i><span>Согласовать маршрут показов и условия договора</span></div>
+        </div>
+      </div>
     </div>
-    <div class="steps">
-      <div class="step rv">
-        <div class="step-key"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <h3>1. Запрос, а не «посмотрим»</h3>
-        <p>Район, бюджет, сроки, животные, парковка — фиксирую всё. Ищу под ваш список и сразу отсеиваю варианты с плохими условиями.</p>
+
+    <div class="tenant-section rv">
+      <div class="tenant-head">
+        <h3>Поиск квартиры без лишних рисков</h3>
       </div>
-      <div class="step rv">
-        <div class="step-key"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 7h16v13H4V7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 7V4h8v3" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m8.5 13.5 2.5 2.5 4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>2. 3–4 реальных варианта</h3>
-        <p>Не 20 «хламовников» с приукрашенных фото. Каждый вариант я проверил до показа и заранее обсуждаю условия с собственником.</p>
-      </div>
-      <div class="step rv">
-        <div class="step-key"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="9" r="3.5" stroke="currentColor" stroke-width="1.8"/><path d="M11.5 9H20l-2 2m-2-2 2 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M2.5 19c1-3 3.2-4.5 5.5-4.5S12.5 16 13.5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-        <h3>3. Чистая сделка и ключи</h3>
-        <p>Проверяю собственника и документы, разбираю договор, помогаю в переговорах и сопровождаю вас до заселения.</p>
+      <div class="tenant-benefits">
+        <div class="tenant-card t-benefit">
+          <div class="t-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <h3>Без фейков и пустых поездок</h3>
+          <p>Проверяет объявления, собственников и актуальность до показа.</p>
+        </div>
+        <div class="tenant-card t-benefit">
+          <div class="t-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Без хаоса в переписках</h3>
+          <p>Сам связывается, уточняет условия и собирает варианты в понятную подборку.</p>
+        </div>
+        <div class="tenant-card t-benefit">
+          <div class="t-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l3 3v15H7V3Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M10 13h5M10 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+          <h3>Без сюрпризов в договоре</h3>
+          <p>Проверяет условия, документы и спорные пункты до подписания.</p>
+        </div>
       </div>
     </div>
-    <a class="btn btn-solid rv" href="#contact" data-goal="tenant">Оставить запрос</a>
+
+    <div class="tenant-section rv">
+      <div class="tenant-head">
+        <h3>Путь арендатора</h3>
+      </div>
+      <div class="tenant-path">
+        <div class="tenant-card path-step"><span class="path-num">01</span><h3>Короткий бриф</h3></div>
+        <div class="tenant-card path-step"><span class="path-num">02</span><h3>Подбор квартир</h3></div>
+        <div class="tenant-card path-step"><span class="path-num">03</span><h3>Согласование и показы</h3></div>
+        <div class="tenant-card path-step"><span class="path-num">04</span><h3>Проверка условий и документов</h3></div>
+        <div class="tenant-card path-step"><span class="path-num">05</span><h3>Договор и ключи</h3></div>
+      </div>
+    </div>
+
+    <div class="tenant-section rv">
+      <div class="tenant-compare">
+        <div class="tenant-card tcmp">
+          <h3>Искать самому</h3>
+          <ul>
+            <li>десятки чатов;</li>
+            <li>неактуальные объявления;</li>
+            <li>одинаковые квартиры под разными адресами;</li>
+            <li>трата времени на звонки;</li>
+            <li>риск пропустить важное в договоре.</li>
+          </ul>
+        </div>
+        <div class="tenant-card tcmp tcmp-good">
+          <h3>С Матвеем</h3>
+          <ul>
+            <li>одна точка контакта;</li>
+            <li>только проверенные варианты;</li>
+            <li>показы по понятному маршруту;</li>
+            <li>переговоры и сопровождение;</li>
+            <li>помощь до получения ключей.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="tenant-section rv">
+      <div class="tenant-card tenant-final">
+        <h3>Расскажите, какую квартиру ищете. Остальное Матвей возьмёт на себя</h3>
+        <a class="btn" href="#contact" data-goal="tenant">Начать подбор</a>
+        <span>Ответит лично. Без передачи менеджерам.</span>
+      </div>
+    </div>
+
   </div>
 </section>
 </div><!-- /spaces-zone -->
