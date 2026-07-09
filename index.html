@@ -59,28 +59,18 @@
     radial-gradient(860px 560px at 18% 12%, rgba(185,138,68,.10), transparent 62%),
     linear-gradient(180deg, rgba(7,11,9,.42), rgba(7,11,9,.34) 45%, rgba(7,11,9,.54));
 }
-.intro-copy{position:relative;z-index:2;text-align:center;color:var(--milk);padding:0 22px}
+#introCanvas{position:relative;z-index:2;width:min(94vw,1000px);height:min(56vh,440px);pointer-events:none}
+.intro-copy{position:relative;z-index:2;text-align:center;color:var(--milk);padding:0 22px;display:none}
 .intro-name{
   font-family:'Playfair Display','Onest',serif;font-size:clamp(44px,8vw,96px);line-height:.95;font-weight:800;
   letter-spacing:.035em;text-transform:uppercase;text-shadow:0 10px 36px rgba(0,0,0,.45);
-  opacity:0;transform:translateY(26px) scale(.985);filter:blur(12px);
-  animation:introNameIn 1.05s .2s cubic-bezier(.16,.84,.28,1) forwards,introBreathe 2s 1.55s ease-in-out 1;
+  opacity:0;
 }
 .intro-role{
   margin-top:18px;font-size:clamp(14px,2.2vw,22px);letter-spacing:.12em;text-transform:uppercase;font-weight:600;
   color:rgba(247,244,239,.84);text-shadow:0 8px 28px rgba(0,0,0,.42);
-  opacity:0;transform:translateY(14px);filter:blur(10px);
-  animation:introRoleIn .88s .58s cubic-bezier(.16,.84,.28,1) forwards;
+  opacity:0;
 }
-#intro.closing .intro-role{animation:introRoleOut .78s cubic-bezier(.22,.72,.22,1) forwards}
-#intro.closing .intro-name{animation:introNameOut .86s .12s cubic-bezier(.22,.72,.22,1) forwards}
-#intro.skipping .intro-role{animation:introRoleOut .34s cubic-bezier(.22,.72,.22,1) forwards}
-#intro.skipping .intro-name{animation:introNameOut .4s .04s cubic-bezier(.22,.72,.22,1) forwards}
-@keyframes introNameIn{to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
-@keyframes introRoleIn{to{opacity:1;transform:translateY(0);filter:blur(0)}}
-@keyframes introBreathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(0) scale(1.01)}}
-@keyframes introRoleOut{to{opacity:0;transform:translateY(-16px);filter:blur(10px)}}
-@keyframes introNameOut{to{opacity:0;transform:translateY(-22px) scale(.992);filter:blur(13px)}}
 #introSkip{
   position:absolute;top:24px;right:24px;z-index:3;
   background:rgba(7,11,9,.22);border:1px solid rgba(247,244,239,.18);border-radius:999px;cursor:pointer;
@@ -93,11 +83,14 @@
 body.intro-lock{overflow:hidden}
 @media(max-width:600px){
   .intro-video{object-position:center center}
+  #introCanvas{width:96vw;height:52vh}
   .intro-copy{padding:0 18px}.intro-name{font-size:clamp(40px,13vw,56px);letter-spacing:.025em}.intro-role{font-size:12px;line-height:1.45;letter-spacing:.1em;margin-top:14px}
   #introSkip{top:16px;right:16px;font-size:11px;padding:8px 11px}
 }
 @media (prefers-reduced-motion:reduce){
   #intro,#introSkip{transition:none}
+  #introCanvas{display:none}
+  .intro-copy{display:block}
   .intro-name,.intro-role{transform:none;filter:none;animation:introFadeOnly .55s ease forwards}
   .intro-role{animation-delay:.2s}
   #intro.closing .intro-name,#intro.closing .intro-role,#intro.skipping .intro-name,#intro.skipping .intro-role{transform:none;filter:none;animation:introFadeOutOnly .32s ease forwards}
@@ -1150,6 +1143,7 @@ footer .caption{color:#6b7280}
     <source src="assets/matvey-intro.mp4" type="video/mp4">
   </video>
   <div class="intro-overlay" aria-hidden="true"></div>
+  <canvas id="introCanvas" width="1000" height="500"></canvas>
   <div class="intro-copy">
     <div class="intro-name">Ёлхин Матвей</div>
     <div class="intro-role">Риелтор по аренде недвижимости</div>
@@ -1964,45 +1958,32 @@ document.querySelectorAll('[data-goal]').forEach(btn => {
   startTimer();
 })();
 
-/* ====== ИНТРО: video + cinematic text ====== */
+/* ====== ИНТРО: VAPORIZE TEXT (Claude) поверх video */
 (function(){
   const intro = document.getElementById('intro');
   if(!intro){ document.body.classList.remove('intro-lock'); return; }
   const video = intro.querySelector('.intro-video');
+  const canvas = document.getElementById('introCanvas');
   const skip = document.getElementById('introSkip');
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let done = false;
-  let closeTimer = null;
-  let doneTimer = null;
-  const CLOSE_AT = reduce ? 1200 : 3500;
-  const DONE_AT = reduce ? 1700 : 4400;
 
   function revealSite(){ document.body.classList.remove('intro-lock'); }
   function removeIntro(delay){ setTimeout(()=>intro.remove(), delay); }
   function finish(skipFast){
     if(done) return;
     done = true;
-    clearTimeout(closeTimer);
-    clearTimeout(doneTimer);
     intro.classList.add('closing');
-    if(skipFast){
-      intro.classList.add('skipping');
-      revealSite();
-      setTimeout(()=>{ intro.classList.add('done'); removeIntro(reduce ? 80 : 460); }, reduce ? 80 : 420);
-    } else {
-      intro.classList.add('done');
-      revealSite();
-      removeIntro(reduce ? 80 : 700);
-    }
+    if(skipFast) intro.classList.add('skipping');
+    revealSite();
+    setTimeout(()=>{ intro.classList.add('done'); removeIntro(skipFast ? 460 : 700); }, skipFast ? 420 : 120);
   }
-  function beginClose(){ if(!done) intro.classList.add('closing'); }
 
   if(video){
     video.muted = true;
     video.playsInline = true;
-    if(reduce){
-      video.pause();
-    } else {
+    if(reduce){ video.pause(); }
+    else {
       const playPromise = video.play();
       if(playPromise && typeof playPromise.catch === 'function'){
         playPromise.catch(()=>{ /* fallback: оставляем статичный кадр/фон и показываем текст */ });
@@ -2010,8 +1991,130 @@ document.querySelectorAll('[data-goal]').forEach(btn => {
     }
   }
   if(skip) skip.addEventListener('click', () => finish(true));
-  closeTimer = setTimeout(beginClose, CLOSE_AT);
-  doneTimer = setTimeout(()=>finish(false), DONE_AT);
+
+  if(reduce || !canvas){
+    setTimeout(()=>intro.classList.add('closing'), 3500);
+    setTimeout(()=>finish(false), 4400);
+    return;
+  }
+
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min((window.devicePixelRatio||1)*1.4, 2.5);
+  const isMobileIntro = window.matchMedia('(max-width:819px)').matches;
+  const LINES = [
+    {text:'ЁЛХИН МАТВЕЙ', color:[247,244,239], size:86, weight:800, tracking:2},
+    {gap:28},
+    {text:'РИЕЛТОР ПО АРЕНДЕ НЕДВИЖИМОСТИ', color:[185,138,68], size:24, weight:600, tracking:8}
+  ];
+  let W=0,H=0, particles=[], boundaries=null;
+  let state='fadingIn', vapProg=0, fadeOp=0, last=performance.now();
+  const VAP=isMobileIntro ? 1050 : 1900;
+  const FADE=isMobileIntro ? 620 : 1000;
+  const WAIT=isMobileIntro ? 1050 : 1650;
+  const SPREAD=0.85, DENSITY=0.74;
+
+  function fit(){
+    const r=canvas.getBoundingClientRect();
+    W=Math.floor(r.width*DPR); H=Math.floor(r.height*DPR);
+    canvas.width=W; canvas.height=H;
+  }
+  function drawTracked(text, cx, y, fpx, weight, tracking){
+    ctx.font=weight+' '+fpx+"px 'Playfair Display', Onest, serif";
+    const tr=tracking*DPR;
+    let total=0; for(const ch of text) total+=ctx.measureText(ch).width+tr;
+    total-=tr;
+    let x=cx-total/2;
+    for(const ch of text){ const w=ctx.measureText(ch).width; ctx.fillText(ch, x+w/2, y); x+=w+tr; }
+    return total;
+  }
+  function build(){
+    fit();
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle';
+    let scale=1;
+    const longest = LINES.filter(l=>l.text).reduce((a,l)=>{
+      ctx.font=l.weight+' '+(l.size*DPR)+"px 'Playfair Display', serif";
+      let t=0; for(const ch of l.text) t+=ctx.measureText(ch).width+l.tracking*DPR;
+      return Math.max(a, t);
+    },0);
+    const maxW=W*(isMobileIntro ? .9 : .86);
+    if(longest>maxW) scale=maxW/longest;
+    const heights=LINES.map(l=> l.gap? l.gap*DPR*scale : l.size*DPR*scale*1.14);
+    const totalH=heights.reduce((a,b)=>a+b,0);
+    let y=H/2-totalH/2;
+    let minL=Infinity,maxR=-Infinity;
+    LINES.forEach((l,i)=>{
+      const lh=heights[i];
+      if(l.text){
+        const fpx=l.size*DPR*scale;
+        const w=drawTracked(l.text, W/2, y+lh/2, fpx, l.weight, l.tracking*scale);
+        minL=Math.min(minL, W/2-w/2); maxR=Math.max(maxR, W/2+w/2);
+      }
+      y+=lh;
+    });
+    boundaries={left:minL, right:maxR, width:maxR-minL};
+    const data=ctx.getImageData(0,0,W,H).data;
+    ctx.clearRect(0,0,W,H);
+    particles=[];
+    const step=Math.max(1, Math.round(DPR/1.5));
+    const accentStart = H/2 + totalH/2 - heights[heights.length-1] - 4;
+    for(let py=0;py<H;py+=step){
+      for(let px=0;px<W;px+=step){
+        const a=data[(py*W+px)*4+3];
+        if(a>0){
+          const op=a/255;
+          const isAccent = py > accentStart;
+          const c = isAccent ? [185,138,68] : [247,244,239];
+          particles.push({x:px,y:py,ox:px,oy:py,c,op,oop:op,vx:0,vy:0,sp:0,fq:false});
+        }
+      }
+    }
+  }
+  const spreadBase=(fs)=> fs<=20?0.2 : fs>=100?1.5 : 0.5+(fs-50)/50;
+  function vaporize(dt){
+    const MS=spreadBase(80)*SPREAD*5; let all=true;
+    const vapX=boundaries.left+boundaries.width*Math.min(100,vapProg)/100;
+    for(const p of particles){
+      if(p.ox<=vapX){
+        if(p.sp===0){p.sp=(Math.random()*1+0.5)*MS;const ang=Math.random()*Math.PI*2;
+          p.vx=Math.cos(ang)*p.sp;p.vy=Math.sin(ang)*p.sp;p.fq=Math.random()>DENSITY;}
+        if(p.fq){p.op=Math.max(0,p.op-dt*1.6);}
+        else{const dx=p.ox-p.x,dy=p.oy-p.y,dist=Math.hypot(dx,dy);
+          const damp=Math.max(0.95,1-dist/(100*MS));
+          const rs=MS*3,sx=(Math.random()-0.5)*rs,sy=(Math.random()-0.5)*rs;
+          p.vx=(p.vx+sx+dx*0.002)*damp;p.vy=(p.vy+sy+dy*0.002)*damp;
+          const mv=MS*2,cv=Math.hypot(p.vx,p.vy);if(cv>mv){p.vx*=mv/cv;p.vy*=mv/cv;}
+          p.x+=p.vx*dt*20;p.y+=p.vy*dt*10;
+          p.op=Math.max(0,p.op-dt*0.25*(2000/VAP));}
+        if(p.op>0.01)all=false;
+      } else all=false;
+    }
+    return all;
+  }
+  function draw(){for(const p of particles){if(p.op>0){
+    ctx.fillStyle='rgba('+p.c[0]+','+p.c[1]+','+p.c[2]+','+p.op+')';
+    ctx.fillRect(p.x,p.y,DPR,DPR);}}}
+  function loop(now){
+    const dt=(now-last)/1000; last=now; ctx.clearRect(0,0,W,H);
+    if(state==='fadingIn'){
+      fadeOp+=dt*1000/FADE;
+      for(const p of particles){p.x=p.ox;p.y=p.oy;
+        const o=Math.min(fadeOp,1)*p.oop;
+        ctx.fillStyle='rgba('+p.c[0]+','+p.c[1]+','+p.c[2]+','+o+')';
+        ctx.fillRect(p.x,p.y,DPR,DPR);}
+      if(fadeOp>=1){ state='waiting'; setTimeout(()=>{ state='vaporizing'; vapProg=0; }, WAIT); }
+    } else if(state==='vaporizing'){
+      vapProg+=dt*100/(VAP/1000);
+      const all=vaporize(dt); draw();
+      if(vapProg>=140 || (vapProg>=100 && all)){ finish(false); return; }
+    } else draw();
+    if(!done) requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize', ()=>{ if(!done) build(); });
+  let started=false;
+  function start(){ if(started)return; started=true; build(); last=performance.now(); requestAnimationFrame(loop); setTimeout(()=>{ if(!done) finish(false); }, 5000); }
+  if(document.fonts && document.fonts.ready){ document.fonts.ready.then(()=>setTimeout(start,100)); }
+  setTimeout(start, 700);
 })();
 
 /* ====== РАЗДЕЛ «Я СОБСТВЕННИК»: интерактив ====== */
