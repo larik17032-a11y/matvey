@@ -835,14 +835,34 @@ header{
 }
 .tenant-card::before{content:"";position:absolute;inset:auto -40px -70px auto;width:210px;height:210px;border-radius:50%;background:radial-gradient(circle,rgba(15,107,87,.16),transparent 68%)}
 .tenant-card>*{position:relative;z-index:1}
-.search-widget{display:grid;gap:14px}
-.sw-top{display:flex;align-items:center;justify-content:space-between;gap:14px}
-.sw-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:800}
-.sw-badge{font-size:13px;font-weight:800;color:var(--emerald);background:rgba(15,107,87,.08);padding:8px 10px;border-radius:999px}
-.sw-query{padding:16px;border-radius:18px;background:#fff;border:1px solid var(--sand);font-weight:700;color:var(--ink);box-shadow:0 10px 28px rgba(28,36,48,.06)}
-.sw-stack{display:grid;gap:10px}
-.sw-row{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:rgba(247,244,239,.72);border:1px solid rgba(221,214,203,.8);color:#47515f;font-size:14px}
-.sw-row i{width:9px;height:9px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 4px rgba(15,107,87,.1);flex:none}
+.tenant-stage{
+  --stage-accent:var(--emerald);
+  min-height:470px;padding:22px;display:flex;flex-direction:column;gap:16px;
+  background:rgba(255,255,255,.68);backdrop-filter:blur(18px) saturate(1.12);-webkit-backdrop-filter:blur(18px) saturate(1.12);
+}
+.tenant-stage::after{content:"";position:absolute;inset:1px;border-radius:27px;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.72),transparent 42%)}
+.ts-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
+.ts-kicker{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:800;margin-bottom:5px}
+.ts-title{font-size:20px;font-weight:800;line-height:1.18;color:var(--ink)}
+.ts-status{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:7px 10px;border-radius:999px;background:rgba(15,107,87,.08);border:1px solid rgba(15,107,87,.12);color:var(--emerald);font-size:12px;font-weight:800;white-space:nowrap}
+.ts-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 5px rgba(15,107,87,.1)}
+.ts-progress{height:4px;border-radius:999px;background:rgba(15,107,87,.09);overflow:hidden;flex:none}
+.ts-progress i{display:block;height:100%;width:16.666%;border-radius:inherit;background:linear-gradient(90deg,var(--emerald),#55B093);transition:width .55s cubic-bezier(.2,.8,.25,1)}
+.tenant-stage[data-step="2"] .ts-progress i{width:33.333%}.tenant-stage[data-step="3"] .ts-progress i{width:50%}.tenant-stage[data-step="4"] .ts-progress i{width:66.666%}.tenant-stage[data-step="5"] .ts-progress i{width:83.333%}.tenant-stage[data-step="6"] .ts-progress i{width:100%}
+.ts-screen{position:relative;flex:1;min-height:310px;overflow:hidden;border-radius:22px;background:rgba(247,244,239,.54);border:1px solid rgba(221,214,203,.72)}
+.ts-panel{position:absolute;inset:0;padding:18px;display:flex;flex-direction:column;gap:14px;opacity:0;transform:translateY(14px) scale(.985);pointer-events:none;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.25,1)}
+.tenant-stage[data-step="1"] .ts-panel[data-panel="1"],.tenant-stage[data-step="2"] .ts-panel[data-panel="2"],.tenant-stage[data-step="3"] .ts-panel[data-panel="3"],.tenant-stage[data-step="4"] .ts-panel[data-panel="4"],.tenant-stage[data-step="5"] .ts-panel[data-panel="5"],.tenant-stage[data-step="6"] .ts-panel[data-panel="6"]{opacity:1;transform:none;pointer-events:auto}
+.ts-query{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ts-chip{padding:12px;border-radius:16px;background:rgba(255,255,255,.82);border:1px solid rgba(221,214,203,.78);box-shadow:0 10px 28px rgba(28,36,48,.05)}
+.ts-chip span{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#7a8490;font-weight:700;margin-bottom:2px}.ts-chip b{font-size:15px;color:var(--ink)}
+.ts-reply{margin-top:auto;padding:14px 16px;border-radius:18px;background:#fff;border:1px solid rgba(185,138,68,.24);box-shadow:0 16px 34px rgba(28,36,48,.07);color:#3f4a57;font-size:14.5px;line-height:1.45}
+.ts-reply::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brass);margin-right:8px}
+.ts-flat-list{display:grid;gap:10px}.ts-flat{display:grid;grid-template-columns:54px 1fr auto;gap:12px;align-items:center;padding:12px;border-radius:18px;background:rgba(255,255,255,.82);border:1px solid rgba(221,214,203,.75);box-shadow:0 14px 28px rgba(28,36,48,.05);transition:opacity .45s ease,transform .45s ease}.ts-flat:nth-child(1){transition-delay:.08s}.ts-flat:nth-child(2){transition-delay:.22s}.ts-flat:nth-child(3){transition-delay:.36s}.tenant-stage[data-sub="reject"] .ts-flat.is-out{opacity:.22;transform:translateX(18px) scale(.98)}.tenant-stage[data-sub="reject"] .ts-flat.is-fit{border-color:rgba(15,107,87,.28);box-shadow:0 16px 34px rgba(15,107,87,.08)}
+.ts-photo{height:44px;border-radius:13px;background:linear-gradient(135deg,rgba(15,107,87,.18),rgba(185,138,68,.18))}.ts-flat b{display:block;font-size:14.5px;color:var(--ink);line-height:1.2}.ts-flat span{font-size:12.5px;color:#6b7280}.ts-mark{font-size:12px;font-weight:800;color:var(--emerald);background:rgba(15,107,87,.09);border-radius:999px;padding:6px 8px;white-space:nowrap}
+.ts-terms{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ts-term{padding:14px;border-radius:16px;background:#fff;border:1px solid rgba(221,214,203,.78)}.ts-term span{display:block;font-size:12px;color:#7a8490;margin-bottom:2px}.ts-term b{font-size:16px;color:var(--ink)}.ts-note{margin-top:auto;font-size:14px;line-height:1.45;color:#4b5563;background:rgba(15,107,87,.07);border:1px solid rgba(15,107,87,.12);border-radius:16px;padding:12px 14px}
+.ts-route{display:grid;gap:12px;margin:auto 0}.ts-route-row{display:grid;grid-template-columns:62px 1fr;gap:12px;align-items:center;padding:14px;border-radius:18px;background:#fff;border:1px solid rgba(221,214,203,.78);box-shadow:0 12px 26px rgba(28,36,48,.05)}.ts-route-row time{font-size:15px;font-weight:800;color:var(--brass);font-variant-numeric:tabular-nums}.ts-route-row span{font-weight:700;color:var(--ink)}
+.ts-checks{display:grid;gap:10px;margin:auto 0}.ts-check{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:#fff;border:1px solid rgba(221,214,203,.78);font-size:14.5px;color:#3f4a57}.ts-check i{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,107,87,.1);color:var(--emerald);font-style:normal;font-weight:900;flex:none}.ts-final{margin:auto 0;display:grid;gap:12px}.ts-final .ts-check{font-weight:700}.ts-keyline{height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent);margin:2px 0}.ts-finale{font-size:15px;line-height:1.45;color:var(--ink);font-weight:700;text-align:center;padding:12px;border-radius:16px;background:rgba(185,138,68,.1);border:1px solid rgba(185,138,68,.22)}
+.ts-dots{display:flex;gap:7px;justify-content:center}.ts-dot{width:7px;height:7px;border-radius:50%;border:0;background:rgba(15,107,87,.18);padding:0;transition:width .25s,background .25s}.tenant-stage[data-step="1"] .ts-dot:nth-child(1),.tenant-stage[data-step="2"] .ts-dot:nth-child(2),.tenant-stage[data-step="3"] .ts-dot:nth-child(3),.tenant-stage[data-step="4"] .ts-dot:nth-child(4),.tenant-stage[data-step="5"] .ts-dot:nth-child(5),.tenant-stage[data-step="6"] .ts-dot:nth-child(6){width:22px;border-radius:999px;background:var(--emerald)}
 .tenant-section{margin-top:clamp(42px,6vw,72px)}
 .tenant-head{margin-bottom:22px;text-align:center}
 .tenant-head h3{font-size:clamp(24px,3vw,34px);color:var(--ink);text-wrap:balance}
@@ -876,18 +896,18 @@ header{
   .track-tenant{padding:52px 0}
   .tenant-hero{grid-template-columns:1fr;gap:22px}
   .tenant-copy{text-align:center}.tenant-copy h2{max-width:none}.tenant-lead{margin-left:auto;margin-right:auto}
-  .tenant-flow{justify-content:center}.tenant-card{border-radius:24px}
+  .tenant-flow{justify-content:center}.tenant-card{border-radius:24px}.tenant-stage{min-height:440px}
   .tenant-benefits{grid-template-columns:1fr}.tenant-path{grid-template-columns:1fr 1fr}.path-step::after{display:none}.tenant-compare{grid-template-columns:1fr}
 }
 @media(max-width:600px){
   .track-tenant{padding:44px 0}.tenant-copy h2{font-size:clamp(27px,7.4vw,34px);line-height:1.08}.tenant-lead{font-size:15px;line-height:1.55}
   .tenant-flow{display:grid;grid-template-columns:1fr;gap:8px}.flow-pill{justify-content:center;white-space:normal;text-align:center}.flow-arrow{display:none}
-  .tenant-hero .btn,.tenant-final .btn{width:100%;justify-content:center}.tenant-card{padding:18px;border-radius:22px}.sw-top{align-items:flex-start}.sw-query{font-size:15px}
+  .tenant-hero .btn,.tenant-final .btn{width:100%;justify-content:center}.tenant-card{padding:18px;border-radius:22px}.tenant-stage{min-height:432px;padding:14px}.ts-head{gap:10px}.ts-title{font-size:17px}.ts-status{font-size:11px;padding:6px 8px;white-space:normal;text-align:left}.ts-screen{min-height:298px;border-radius:18px}.ts-panel{padding:12px;gap:10px}.ts-query,.ts-terms{grid-template-columns:1fr}.ts-chip,.ts-term{padding:10px}.ts-flat{grid-template-columns:40px 1fr;gap:9px;padding:10px}.ts-mark{grid-column:2;justify-self:start}.ts-photo{height:38px}.ts-route-row{grid-template-columns:54px 1fr;padding:11px}.ts-check{padding:10px;font-size:13.5px}
   .tenant-section{margin-top:38px}.tenant-head{text-align:left}.tenant-head h3{font-size:24px}.tenant-head p{font-size:15px}
   .t-benefit{padding:18px}.tenant-path{grid-template-columns:1fr}.path-step{min-height:auto;padding:18px}.path-num{margin-bottom:12px}
   .tcmp{padding:20px 18px}.tenant-final{padding:26px 18px}.tenant-final h3{font-size:24px}
 }
-@media (prefers-reduced-motion:reduce){.t-benefit{transition:none}}
+@media (prefers-reduced-motion:reduce){.t-benefit,.ts-progress i,.ts-panel,.ts-flat,.ts-dot{transition:none}}
 /* два пространства: переключатель */
 .spaces-bar{padding:34px 0 6px;position:sticky;top:112px;z-index:40}
 .mode-switch{
@@ -1336,7 +1356,7 @@ footer .caption{color:#6b7280}
       <div class="tenant-copy">
         <span class="eyebrow">Я арендатор</span>
         <h2>Не листать сотни объявлений. Найти квартиру, в которую хочется заехать</h2>
-        <p class="tenant-lead">Вы говорите бюджет, район и пожелания. Я возьму поиск, переговоры, проверки и показы на себя.</p>
+        <p class="tenant-lead">Вы рассказываете, какую квартиру ищете. Я уточняю детали, проверяю варианты, договариваюсь о показах и сопровождаю до получения ключей.</p>
         <div class="tenant-flow" aria-label="Путь от запроса до ключей">
           <span class="flow-pill">Один запрос</span><span class="flow-arrow">→</span>
           <span class="flow-pill">Отобранные варианты</span><span class="flow-arrow">→</span>
@@ -1345,15 +1365,65 @@ footer .caption{color:#6b7280}
         </div>
         <a class="btn btn-solid" href="#contact" data-goal="tenant">Подобрать квартиру</a>
       </div>
-      <div class="tenant-card search-widget tilt">
-        <span class="spot" aria-hidden="true"></span>
-        <div class="sw-top"><span class="sw-label">Подбор под ключ</span><span class="sw-badge">без хаоса</span></div>
-        <div class="sw-query">Москва · до 120 000 ₽ · светлая 2-комнатная · рядом с метро</div>
-        <div class="sw-stack">
-          <div class="sw-row"><i></i><span>Проверю актуальность и собственника до показа</span></div>
-          <div class="sw-row"><i></i><span>Соберу варианты в короткую понятную подборку</span></div>
-          <div class="sw-row"><i></i><span>Согласую маршрут показов и условия договора</span></div>
+      <div class="tenant-card tenant-stage" id="tenantStage" data-step="1" aria-live="polite">
+        <div class="ts-head">
+          <div><span class="ts-kicker">Подбор под ключ</span><div class="ts-title" id="tsTitle">Заявка получена</div></div>
+          <span class="ts-status" id="tsStatus">Получил ваш запрос</span>
         </div>
+        <div class="ts-progress" aria-hidden="true"><i id="tsProgress"></i></div>
+        <div class="ts-screen">
+          <div class="ts-panel" data-panel="1">
+            <div class="ts-query">
+              <div class="ts-chip"><span>Город</span><b>Москва</b></div>
+              <div class="ts-chip"><span>Бюджет</span><b>до 120 000 ₽</b></div>
+              <div class="ts-chip"><span>Формат</span><b>светлая 2-комнатная</b></div>
+              <div class="ts-chip"><span>Локация</span><b>рядом с метро</b></div>
+            </div>
+            <div class="ts-reply">Уточняю район, сроки, состав жильцов и важные пожелания</div>
+          </div>
+          <div class="ts-panel" data-panel="2">
+            <div class="ts-flat-list">
+              <div class="ts-flat is-fit"><div class="ts-photo"></div><div><b>Хамовники</b><span>2 комнаты · 118 000 ₽</span></div><span class="ts-mark">подходит</span></div>
+              <div class="ts-flat is-out"><div class="ts-photo"></div><div><b>Павелецкая</b><span>фото не совпали</span></div><span class="ts-mark">отсеяно</span></div>
+              <div class="ts-flat is-fit"><div class="ts-photo"></div><div><b>Пресня</b><span>2 комнаты · 120 000 ₽</span></div><span class="ts-mark">подходит</span></div>
+            </div>
+          </div>
+          <div class="ts-panel" data-panel="3">
+            <div class="ts-terms">
+              <div class="ts-term"><span>Стоимость</span><b>120 000 ₽</b></div>
+              <div class="ts-term"><span>Депозит</span><b>1 месяц</b></div>
+              <div class="ts-term"><span>Комиссия</span><b>согласована заранее</b></div>
+              <div class="ts-term"><span>Дата заезда</span><b>15 августа</b></div>
+            </div>
+            <div class="ts-note">Все условия известны до показа. Без неожиданных платежей</div>
+          </div>
+          <div class="ts-panel" data-panel="4">
+            <div class="ts-route">
+              <div class="ts-route-row"><time>12:00</time><span>Хамовники</span></div>
+              <div class="ts-route-row"><time>13:30</time><span>Пресня</span></div>
+              <div class="ts-route-row"><time>15:00</time><span>Хорошёвский</span></div>
+            </div>
+          </div>
+          <div class="ts-panel" data-panel="5">
+            <div class="ts-checks">
+              <div class="ts-check"><i>✓</i><span>собственник и документы</span></div>
+              <div class="ts-check"><i>✓</i><span>условия аренды</span></div>
+              <div class="ts-check"><i>✓</i><span>спорные пункты договора</span></div>
+              <div class="ts-check"><i>✓</i><span>состояние квартиры</span></div>
+            </div>
+            <div class="ts-note">До подписания объясняю каждый важный пункт</div>
+          </div>
+          <div class="ts-panel" data-panel="6">
+            <div class="ts-final">
+              <div class="ts-check"><i>✓</i><span>договор согласован</span></div>
+              <div class="ts-check"><i>✓</i><span>квартира принята</span></div>
+              <div class="ts-check"><i>✓</i><span>ключи получены</span></div>
+              <div class="ts-keyline" aria-hidden="true"></div>
+              <div class="ts-finale">Сопровождаю до момента, когда ключи уже у вас</div>
+            </div>
+          </div>
+        </div>
+        <div class="ts-dots" aria-hidden="true"><span class="ts-dot"></span><span class="ts-dot"></span><span class="ts-dot"></span><span class="ts-dot"></span><span class="ts-dot"></span><span class="ts-dot"></span></div>
       </div>
     </div>
 
@@ -1722,6 +1792,51 @@ document.querySelectorAll('[data-goal]').forEach(btn => {
     if (r) r.checked = true;
   });
 });
+
+/* Hero-сцена арендатора: короткий премиальный цикл процесса */
+(function(){
+  const stage = document.getElementById('tenantStage');
+  if (!stage) return;
+  const title = document.getElementById('tsTitle');
+  const status = document.getElementById('tsStatus');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const steps = [
+    ['Заявка получена', 'Получил ваш запрос'],
+    ['Формирую подборку', 'Проверяю актуальность объявлений'],
+    ['Формирую подборку', 'Связываюсь с собственниками'],
+    ['Формирую подборку', 'Отсеиваю неподходящие варианты'],
+    ['Согласовываю условия', 'Все условия известны заранее'],
+    ['Организую показы', 'Собираю показы в один удобный маршрут'],
+    ['Проверяю квартиру и документы', 'Проверяю важные детали'],
+    ['Договор и ключи', 'Сопровождаю до получения ключей']
+  ];
+  const viewByIndex = [1,2,2,2,3,4,5,6];
+  let idx = 0, timer = null, paused = false;
+  function render(){
+    const view = viewByIndex[idx];
+    stage.dataset.step = String(view);
+    stage.dataset.sub = idx === 3 ? 'reject' : '';
+    title.textContent = steps[idx][0];
+    status.textContent = steps[idx][1];
+  }
+  function next(){
+    if (paused) return;
+    idx = (idx + 1) % steps.length;
+    render();
+  }
+  render();
+  if (reduce) return;
+  timer = setInterval(next, 2400);
+  function setPaused(on){ paused = on; }
+  stage.addEventListener('mouseenter', () => setPaused(true));
+  stage.addEventListener('mouseleave', () => setPaused(false));
+  stage.addEventListener('focusin', () => setPaused(true));
+  stage.addEventListener('focusout', () => setPaused(false));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && timer) { clearInterval(timer); timer = null; }
+    else if (!document.hidden && !timer) { timer = setInterval(next, 2400); }
+  });
+})();
 
 /* ====== ИНТРО: VAPORIZE TEXT (адаптация 21st) ====== */
 (function(){
