@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "matvey-static",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["/private/tmp/claude-501/-Users-sergejlarionov-Desktop-Sites-matvey/1ba4b75e-813e-4ae7-a1c2-1a2f4905373b/scratchpad/serve.js"],
+      "port": 4600
+    }
+  ]
+}

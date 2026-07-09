@@ -594,76 +594,208 @@ header{
 .step p{font-size:16px;color:#3d4756}
 .track .btn{margin-top:26px}
 .track-owner .steps + .btn,.track .steps + .btn{display:table;margin-left:auto;margin-right:auto}
+/* ============================================================
+   ТРЕК СОБСТВЕННИКА — глубокий графит + премиальное стекло
+   (продолжение существующего словаря .why-card, но на тёмном фоне)
+   ============================================================ */
 .track-owner{
-  position:relative;
+  position:relative;overflow:hidden;isolation:isolate;
   background:
-    radial-gradient(800px 420px at 100% 0%, rgba(185,138,68,.07), transparent 60%),
-    radial-gradient(700px 420px at 0% 100%, rgba(15,107,87,.05), transparent 60%),
-    var(--white);
+    radial-gradient(1000px 640px at 8% -10%, rgba(185,138,68,.10), transparent 58%),
+    radial-gradient(900px 620px at 104% 6%, rgba(15,107,87,.14), transparent 56%),
+    radial-gradient(760px 760px at 88% 116%, rgba(185,138,68,.06), transparent 62%),
+    linear-gradient(168deg,#141B23 0%,#0F151C 46%,#0A0E14 100%);
 }
 .track-owner::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent 8%,var(--sand) 50%,transparent 92%);
+  content:"";position:absolute;top:0;left:0;right:0;height:1px;z-index:3;
+  background:linear-gradient(90deg,transparent 8%,rgba(185,138,68,.6) 50%,transparent 92%);
 }
-.track-owner .step{background:var(--milk)}
-/* продающие карточки «почему через меня» — iOS glass scroll */
-.why-owner{
-  display:flex;gap:18px;margin-top:12px;
-  overflow-x:auto;scroll-snap-type:x mandatory;
-  padding:8px 4px 24px;scrollbar-width:none;
-  -webkit-overflow-scrolling:touch;
+.track-owner::after{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-.why-owner::-webkit-scrollbar{display:none}
-.why-card{
-  flex:0 0 min(84%,380px);scroll-snap-align:center;
-  border-radius:22px;padding:30px 26px;position:relative;overflow:hidden;
-  background:rgba(255,255,255,.06);
+.track-owner>.container{position:relative;z-index:2}
+/* дрейфующие световые пятна (глубина) */
+.own-aura{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.own-aura i{position:absolute;display:block;border-radius:50%;filter:blur(64px);opacity:.55}
+.own-aura .a1{width:520px;height:520px;left:-8%;top:-14%;background:radial-gradient(circle,rgba(185,138,68,.34),transparent 68%);animation:auraDrift1 22s ease-in-out infinite alternate}
+.own-aura .a2{width:560px;height:560px;right:-12%;top:16%;background:radial-gradient(circle,rgba(15,107,87,.40),transparent 66%);animation:auraDrift2 28s ease-in-out infinite alternate}
+.own-aura .a3{width:480px;height:480px;left:32%;bottom:-18%;background:radial-gradient(circle,rgba(185,138,68,.16),transparent 70%);animation:auraDrift3 32s ease-in-out infinite alternate}
+@keyframes auraDrift1{from{transform:translate(0,0)}to{transform:translate(42px,32px)}}
+@keyframes auraDrift2{from{transform:translate(0,0)}to{transform:translate(-46px,26px)}}
+@keyframes auraDrift3{from{transform:translate(0,0)}to{transform:translate(30px,-30px)}}
+
+/* типографика на тёмном */
+.track-owner h2,.track-owner h3,.track-owner h4{color:var(--milk)}
+.track-owner .eyebrow{color:var(--brass)}
+.own-lead{color:rgba(247,244,239,.72);line-height:1.6}
+.own-sub{color:rgba(247,244,239,.5);font-size:14.5px;line-height:1.6;margin-top:12px;max-width:52ch}
+.own-scene{position:relative}
+.own-scene + .own-scene{margin-top:clamp(54px,7.5vw,96px)}
+.own-head{margin-bottom:26px}
+.own-head h2{font-size:clamp(25px,3.2vw,36px);max-width:42ch}
+.own-head .own-lead{margin-top:12px;max-width:60ch}
+
+/* ---- базовое премиальное стекло ---- */
+.tiltwrap{perspective:1100px}
+.oglass{
+  position:relative;border-radius:24px;overflow:hidden;
+  padding:clamp(22px,3vw,32px);
+  background:linear-gradient(155deg, rgba(255,255,255,.085), rgba(255,255,255,.022));
   border:1px solid rgba(255,255,255,.13);
-  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  backdrop-filter:blur(22px) saturate(1.15);-webkit-backdrop-filter:blur(22px) saturate(1.15);
   box-shadow:
-    0 20px 50px rgba(0,0,0,.12),
-    inset 0 1px 0 rgba(255,255,255,.18),
-    inset 0 -1px 0 rgba(0,0,0,.06);
+    0 34px 70px -26px rgba(0,0,0,.62),
+    inset 0 1px 0 rgba(255,255,255,.22),
+    inset 0 -1px 0 rgba(0,0,0,.28);
 }
-/* зеркальный блик сверху */
-.why-card::before{
-  content:"";position:absolute;top:0;left:0;right:0;height:50%;
-  background:linear-gradient(to bottom, rgba(255,255,255,.10), transparent);
-  border-radius:22px 22px 0 0;pointer-events:none;
+.oglass::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:46%;pointer-events:none;z-index:1;
+  background:linear-gradient(to bottom, rgba(255,255,255,.14), transparent);
 }
-/* свечение-глубина снизу */
-.why-card::after{
-  content:"";position:absolute;bottom:-30px;left:20%;right:20%;height:60px;
-  background:radial-gradient(ellipse, rgba(185,138,68,.15), transparent 70%);
-  filter:blur(20px);pointer-events:none;
+.oglass>*{position:relative;z-index:2}
+.oglass .spot{
+  position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .4s;
+  background:radial-gradient(360px circle at var(--mx,50%) var(--my,-20%), rgba(255,255,255,.12), transparent 60%);
 }
-.why-num{
-  font-size:14px;font-weight:800;color:var(--brass);letter-spacing:.14em;
-  margin-bottom:16px;opacity:.7;
+.tilt{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.8,.25,1);transform-style:preserve-3d}
+.tilt.tilting{transition:transform .1s ease}
+.tilt:hover .spot{opacity:1}
+
+/* кнопки на тёмном */
+.btn-gold{background:linear-gradient(135deg,#CBA05C,#B98A44);color:#231A0C;border-color:transparent;box-shadow:0 14px 34px -8px rgba(185,138,68,.5)}
+.btn-gold:hover{background:linear-gradient(135deg,#D9B26E,#C39750);border-color:transparent}
+.btn-lite{background:rgba(255,255,255,.07);color:var(--milk);border-color:rgba(255,255,255,.22)}
+.btn-lite:hover{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.3)}
+
+/* ---------- ЭКРАН 1: вход + деньги + калькулятор ---------- */
+.own-hero{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(24px,3.5vw,48px);align-items:center}
+.own-hero-copy h2{font-size:clamp(27px,3.7vw,42px);margin-top:14px;max-width:24ch}
+.own-hero-copy .own-lead{margin-top:14px}
+.own-hero-cards{display:grid;gap:16px}
+.money-card{display:flex;flex-direction:column;gap:12px}
+.money-label{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(247,244,239,.55);font-weight:600}
+.money-0{
+  font-size:clamp(66px,9vw,104px);font-weight:800;line-height:.9;letter-spacing:-.03em;
+  display:flex;align-items:flex-start;gap:6px;
+  background:linear-gradient(180deg,#F5E7C4,#C89B4F);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 6px 22px rgba(185,138,68,.28));
 }
-.why-card h3{font-size:19px;margin-bottom:12px;letter-spacing:-.01em;color:var(--ink)}
-.why-card p{font-size:15px;color:#4b5563;line-height:1.65}
-/* навигация карусели */
-.why-nav{display:flex;gap:10px;justify-content:center;margin-top:6px}
-.wn{
-  width:48px;height:48px;border-radius:50%;cursor:pointer;
-  border:1px solid var(--sand);background:var(--white);color:var(--ink);
-  display:flex;align-items:center;justify-content:center;
-  transition:border-color .2s,background .2s;box-shadow:var(--shadow);
-}
-.wn:hover{border-color:var(--brass);background:var(--milk)}
-/* CTA-плашка с оплатой по факту */
-.owner-cta{
-  margin-top:24px;background:var(--ink);border-radius:var(--radius);
-  padding:28px 26px;display:flex;flex-direction:column;gap:20px;
-  align-items:flex-start;
+.money-0 i{font-size:.42em;font-style:normal;font-weight:700;margin-top:.32em;-webkit-text-fill-color:#D9B26E;color:#D9B26E}
+.money-note{font-size:16px;color:var(--milk);font-weight:600}
+.money-fine{font-size:13.5px;color:rgba(247,244,239,.55);line-height:1.55}
+.money-card .btn{margin-top:8px;align-self:flex-start}
+.calc-card{display:flex;flex-direction:column;gap:12px}
+.calc-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.calc-cap{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,244,239,.55);font-weight:600}
+.calc-val{font-size:22px;font-weight:800;color:var(--milk);font-variant-numeric:tabular-nums}
+.calc-range{
+  -webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:999px;outline:none;margin:6px 0 2px;cursor:pointer;
   background:
-    radial-gradient(600px 300px at 100% 0%, rgba(185,138,68,.14), transparent 60%),
-    var(--ink);
+    linear-gradient(90deg,var(--brass),#E0C081) 0/var(--fill,32%) 100% no-repeat,
+    rgba(255,255,255,.13);
 }
-.owner-cta-text b{display:block;color:var(--milk);font-size:18px;margin-bottom:6px}
-.owner-cta-text span{color:rgba(247,244,239,.7);font-size:15px;line-height:1.6}
-.owner-cta .btn{flex:none}
+.calc-range::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F3E1B7,#B98A44);border:2px solid rgba(255,255,255,.55);box-shadow:0 6px 16px rgba(0,0,0,.45);cursor:pointer;transition:transform .15s}
+.calc-range::-webkit-slider-thumb:hover{transform:scale(1.14)}
+.calc-range::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F3E1B7,#B98A44);border:2px solid rgba(255,255,255,.55);box-shadow:0 6px 16px rgba(0,0,0,.45);cursor:pointer}
+.calc-rows{display:grid;gap:8px;margin-top:6px}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08)}
+.calc-row span{font-size:14px;color:rgba(247,244,239,.7)}
+.calc-row b{font-size:18px;font-weight:800;color:#E7A98C;font-variant-numeric:tabular-nums}
+.calc-fine{font-size:13.5px;font-style:italic;color:rgba(247,244,239,.6);line-height:1.5;margin-top:2px}
+
+/* ---------- ЭКРАН 2: сравнение через переключатель ---------- */
+.own-compare .own-head{text-align:center;max-width:52ch;margin-left:auto;margin-right:auto}
+.own-compare .own-head .own-lead{margin-left:auto;margin-right:auto}
+.cmp-switch{position:relative;display:flex;max-width:420px;margin:22px auto 26px;padding:5px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.cmp-thumb{position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:999px;background:linear-gradient(135deg,#CBA05C,#B98A44);box-shadow:0 8px 24px rgba(185,138,68,.4);transition:transform .45s cubic-bezier(.2,.85,.25,1)}
+.cmp-switch[data-side="matvey"] .cmp-thumb{transform:translateX(100%)}
+.cmp-btn{flex:1;position:relative;z-index:1;border:none;background:none;cursor:pointer;font-family:'Onest',sans-serif;font-weight:600;font-size:15px;min-height:46px;border-radius:999px;color:rgba(247,244,239,.6);transition:color .3s}
+.cmp-btn.active{color:#231A0C}
+.cmp-card{max-width:900px;margin:0 auto;transition:box-shadow .5s,border-color .5s}
+.cmp-card[data-side="matvey"]{border-color:rgba(185,138,68,.32);box-shadow:0 34px 70px -26px rgba(0,0,0,.62),inset 0 1px 0 rgba(255,255,255,.22),0 22px 60px -22px rgba(185,138,68,.32)}
+.cmp-list{display:grid;gap:2px}
+.cmp-row{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:15px 4px;border-bottom:1px solid rgba(255,255,255,.07);transition:opacity .35s,transform .35s}
+.cmp-row:last-child{border-bottom:none}
+.cmp-list.swapping .cmp-row{opacity:0;transform:translateY(8px)}
+.cmp-num{font-size:15px;font-weight:800;letter-spacing:.06em;color:var(--brass);min-width:26px;font-variant-numeric:tabular-nums;transition:color .4s}
+.cmp-card[data-side="matvey"] .cmp-num{color:#79D0B4}
+.cmp-row h4{font-size:16.5px;color:var(--milk);font-weight:700;margin-bottom:3px}
+.cmp-row p{font-size:14px;color:rgba(247,244,239,.62);line-height:1.5}
+
+/* ---------- ЭКРАН 3: маршрут сдачи ---------- */
+.route-track{display:flex;gap:10px;overflow-x:auto;padding:6px 2px 16px;scrollbar-width:none;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.route-track::-webkit-scrollbar{display:none}
+.rt-stage{flex:0 0 auto;scroll-snap-align:center;cursor:pointer;text-align:left;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);border-radius:14px;padding:12px 16px;display:flex;flex-direction:column;gap:4px;min-width:116px;transition:transform .4s cubic-bezier(.2,.8,.25,1),background .4s,border-color .4s,box-shadow .4s}
+.rt-stage .rn{font-size:12px;font-weight:800;letter-spacing:.1em;color:rgba(247,244,239,.4)}
+.rt-stage .rl{font-size:14px;font-weight:700;color:var(--milk)}
+.rt-stage.active{background:linear-gradient(150deg,rgba(185,138,68,.24),rgba(185,138,68,.05));border-color:rgba(185,138,68,.5);transform:translateY(-4px) scale(1.05);box-shadow:0 16px 40px -12px rgba(185,138,68,.42)}
+.rt-stage.active .rn{color:var(--brass)}
+.rt-detail{margin-top:16px;min-height:172px}
+.rt-body{transition:opacity .3s,transform .3s}
+.rt-body.out{opacity:0;transform:translateY(8px)}
+.rt-index{display:flex;align-items:baseline;gap:8px;color:var(--brass);font-weight:800;letter-spacing:.1em;margin-bottom:10px;font-variant-numeric:tabular-nums}
+.rt-index em{font-style:normal;font-size:13px;color:rgba(247,244,239,.4)}
+.rt-detail h3{font-size:clamp(20px,2.4vw,26px);margin-bottom:8px}
+.rt-detail p{font-size:15px;color:rgba(247,244,239,.7);line-height:1.6;max-width:60ch}
+.rt-progress{margin-top:18px;height:3px;border-radius:999px;background:rgba(255,255,255,.1);overflow:hidden}
+.rt-progress i{display:block;height:100%;width:12.5%;background:linear-gradient(90deg,var(--brass),#E0C081);transition:width .5s cubic-bezier(.2,.8,.25,1)}
+
+/* ---------- ЭКРАН 4: bento + финальный CTA ---------- */
+.bento{display:grid;gap:16px}
+.bento-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.bento-row .tiltwrap{height:100%}
+.bento .oglass{display:flex;flex-direction:column;gap:8px}
+.bento-row .oglass{height:100%}
+.bento-card h3{font-size:17px}
+.bento-card p{font-size:14px;color:rgba(247,244,239,.6);line-height:1.55}
+.money-0.sm{font-size:clamp(46px,5vw,64px)}
+.bento-card.accent{background:linear-gradient(155deg,rgba(185,138,68,.18),rgba(255,255,255,.03));border-color:rgba(185,138,68,.3)}
+/* «0 ₽» — горизонтальный акцентный баннер */
+.b-a .oglass{flex-direction:row;align-items:center;gap:24px;padding:clamp(20px,2.4vw,28px) clamp(24px,3vw,34px)}
+.b-a .money-0{margin:0;flex:none;line-height:.85}
+.b-a-txt h3{margin-bottom:2px}
+.b-a-txt p{font-size:14.5px;color:rgba(247,244,239,.62)}
+.final-card{text-align:center;align-items:center;justify-content:center;gap:14px;padding:clamp(28px,3.4vw,42px)}
+.final-card h3{font-size:clamp(22px,2.8vw,32px);max-width:26ch}
+.final-card p{max-width:56ch;color:rgba(247,244,239,.66);font-size:15px;line-height:1.6}
+.final-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:4px}
+.final-fine{font-size:13px;color:rgba(247,244,239,.5)}
+
+@media(max-width:819px){
+  .track-owner{padding:56px 0}
+  .own-hero{grid-template-columns:1fr;gap:28px}
+  .bento-row{grid-template-columns:repeat(2,1fr)}
+  .b-a .oglass{flex-direction:column;align-items:flex-start;gap:12px}
+  .rt-detail{min-height:auto}
+  /* больше воздуха между сценами */
+  .own-scene + .own-scene{margin-top:58px}
+  .own-head{margin-bottom:24px}
+  /* заголовки — по центру, сбалансированный перенос (не «стопкой») */
+  .own-hero-copy,.own-head{text-align:center}
+  .own-hero-copy h2,.own-head h2{max-width:none;text-wrap:balance}
+  .own-lead,.own-sub{margin-left:auto;margin-right:auto;text-wrap:pretty}
+}
+@media(max-width:600px){
+  .track-owner{padding:48px 0}
+  .own-scene + .own-scene{margin-top:48px}
+  .own-hero{gap:24px}
+  .own-head h2{font-size:clamp(24px,6.6vw,30px)}
+  .own-hero-copy h2{font-size:clamp(26px,7.2vw,34px)}
+  .own-sub{font-size:13.5px;margin-top:10px}
+  .money-0{font-size:clamp(52px,15vw,70px)}
+  .money-0.sm{font-size:clamp(44px,11vw,56px)}
+  .calc-row{padding:13px 14px}
+  .rt-stage{min-width:104px}
+  .cmp-card{padding:20px 16px}
+  .final-actions .btn{width:100%}
+  .bento-row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .own-aura i{animation:none}
+  .tilt,.cmp-thumb,.rt-progress i,.rt-body,.cmp-row,.rt-stage,.cmp-card{transition:none}
+}
 /* трек арендаторов — глубокий премиальный изумруд */
 .track-tenant{
   position:relative;overflow:hidden;
@@ -885,11 +1017,7 @@ footer .caption{color:#6b7280}
   .hero-figure{display:none}
   .steps{grid-template-columns:repeat(2,1fr)}
   .numbers{grid-template-columns:repeat(4,1fr)}
-
-  .why-owner{grid-template-columns:repeat(2,1fr);gap:18px}
-  .owner-cta{flex-direction:row;align-items:center;justify-content:space-between;padding:32px 34px}
-  .owner-cta-text{max-width:60%}
-    .principles .p-grid{grid-template-columns:repeat(3,1fr)}
+  .principles .p-grid{grid-template-columns:repeat(3,1fr)}
   .step p,.principle p,.review p,.faq-a p{font-size:17px}
 }
 </style>
@@ -928,7 +1056,6 @@ footer .caption{color:#6b7280}
       <a href="#owner">Сдать</a>
       <a href="#tenant">Снять</a>
       <a href="#trust">Отзывы</a>
-      <a href="#principles">Как я работаю</a>
       <a href="#faq">Вопросы</a>
       <a href="#contact">Оставить заявку</a>
     </nav>
@@ -1026,43 +1153,127 @@ footer .caption{color:#6b7280}
 
 <!-- ТРЕК: СДАТЬ -->
 <section class="track track-owner space active" id="owner">
+  <div class="own-aura" aria-hidden="true"><i class="a1"></i><i class="a2"></i><i class="a3"></i></div>
   <div class="container">
-    <div class="track-head rv">
-      <span class="eyebrow">Собственникам</span>
-      <h2>Ваша квартира сдаётся сама. Пока вы занимаетесь своими делами</h2>
-      <p class="track-lead">90% квартир в Москве сдаются через агентов — и вот почему. Самому сдать можно, но это недели звонков, показов по вечерам, риск пустить в квартиру кого попало и остаться с долгами и убитым ремонтом. Я закрываю это за вас.</p>
+
+    <!-- ЭКРАН 1: вход + деньги + калькулятор -->
+    <div class="own-scene own-hero rv">
+      <div class="own-hero-copy">
+        <span class="eyebrow">Для собственников</span>
+        <h2>Сдать квартиру самому кажется дешевле. Пока она не начала простаивать.</h2>
+        <p class="own-lead">Неверная цена, слабая подача, задержки с ответами и случайные кандидаты могут стоить больше, чем профессиональное сопровождение.</p>
+        <p class="own-sub">Профессиональная подготовка, правильная цена и быстрая работа с обращениями помогают сократить лишний простой и быстрее выйти на подходящего арендатора.</p>
+      </div>
+      <div class="own-hero-cards">
+        <div class="tiltwrap"><div class="oglass money-card tilt">
+          <span class="spot" aria-hidden="true"></span>
+          <div class="money-label">Для собственника</div>
+          <div class="money-0"><span>0</span><i>₽</i></div>
+          <div class="money-note">Услуги Матвея оплачивает арендатор</div>
+          <p class="money-fine">Вы не платите комиссию риелтору и сохраняете контроль над каждым решением.</p>
+          <a class="btn btn-gold" href="#contact" data-goal="owner">Оценить мою квартиру</a>
+        </div></div>
+        <div class="tiltwrap"><div class="oglass calc-card tilt">
+          <span class="spot" aria-hidden="true"></span>
+          <div class="calc-head">
+            <span class="calc-cap">Стоимость аренды</span>
+            <span class="calc-val" id="calcVal">80 000 ₽</span>
+          </div>
+          <input class="calc-range" id="calcRange" type="range" min="30000" max="200000" step="5000" value="80000" aria-label="Стоимость аренды в месяц">
+          <div class="calc-rows">
+            <div class="calc-row"><span>1 неделя простоя</span><b id="calcWeek">−20 000 ₽</b></div>
+            <div class="calc-row"><span>1 месяц простоя</span><b id="calcMonth">−80 000 ₽</b></div>
+          </div>
+          <p class="calc-fine">Простой — это тоже расход. Просто он не приходит отдельным счётом.</p>
+        </div></div>
+      </div>
     </div>
 
-    <div class="why-owner">
-      <div class="why-card rv">
-        <div class="why-num">01</div>
-        <h3>Квартира в топе ЦИАН — сдаётся быстрее</h3>
-        <p>Размещаю ваш объект на ЦИАН и Авито с платным продвижением в топ выдачи. Ваше объявление видят первым сотни арендаторов, а не оно тонет на 15-й странице. Отсюда средний срок сдачи — 7 дней, а не месяц.</p>
+    <!-- ЭКРАН 2: сравнение через переключатель -->
+    <div class="own-scene own-compare rv">
+      <div class="own-head">
+        <h2>Почему похожие квартиры сдаются с разной скоростью?</h2>
+        <p class="own-lead">Часто дело не в квартире. Дело в цене, подаче и скорости работы с кандидатами.</p>
       </div>
-      <div class="why-card rv">
-        <div class="why-num">02</div>
-        <h3>Отвечаю на отклики 24/7 — вы не отвлекаетесь</h3>
-        <p>Арендатор пишет в 8 утра или в 23:00 — отвечаю я, а не вы. Пока вы работаете, спите или отдыхаете, я веду переписку, договариваюсь о показах и отсеиваю пустые заявки. Вы вообще можете не участвовать — это и есть моя работа.</p>
+      <div class="cmp-switch" id="cmpSwitch" data-side="self" role="tablist" aria-label="Сценарий сдачи">
+        <span class="cmp-thumb" aria-hidden="true"></span>
+        <button class="cmp-btn active" data-cmp="self" role="tab" aria-selected="true" type="button">Самостоятельно</button>
+        <button class="cmp-btn" data-cmp="matvey" role="tab" aria-selected="false" type="button">С Матвеем</button>
       </div>
-      <div class="why-card rv">
-        <div class="why-num">03</div>
-        <h3>Проверяю жильцов так, чтобы вы спали спокойно</h3>
-        <p>Платёжеспособность, история аренды, долги, судимости. В вашу квартиру заедут только те, за кого я готов поручиться. Именно проверка на входе экономит вам нервы и деньги потом.</p>
+      <div class="tiltwrap"><div class="oglass cmp-card tilt" id="cmpCard" data-side="self">
+        <span class="spot" aria-hidden="true"></span>
+        <div class="cmp-list" id="cmpList"></div>
+      </div></div>
+    </div>
+
+    <!-- ЭКРАН 3: маршрут сдачи -->
+    <div class="own-scene own-route rv">
+      <div class="own-head">
+        <h2>Не просто размещает объявление. Управляет всей сдачей.</h2>
       </div>
-      <div class="why-card rv">
-        <div class="why-num">04</div>
-        <h3>Всю бумажную волокиту беру на себя</h3>
-        <p>Договор, опись имущества, депозит, акт приёма-передачи — оформляю юридически грамотно, чтобы защитить именно вас. Никаких скачанных из интернета шаблонов «между сторонами».</p>
+      <div class="route" id="route">
+        <div class="route-track" id="routeTrack" role="tablist" aria-label="Этапы сдачи"></div>
+        <div class="tiltwrap"><div class="oglass rt-detail tilt" id="rtDetail">
+          <span class="spot" aria-hidden="true"></span>
+          <div class="rt-body" id="rtBody">
+            <div class="rt-index"><span id="rtNum">01</span><em>/ 08</em></div>
+            <h3 id="rtTitle">Оценка</h3>
+            <p id="rtText">Определяем ставку, которая сохраняет доход собственника и соответствует реальному спросу.</p>
+          </div>
+          <div class="rt-progress"><i id="rtBar"></i></div>
+        </div></div>
       </div>
     </div>
 
-    <div class="owner-cta rv">
-      <div class="owner-cta-text">
-        <b>Оплата — только по факту сдачи.</b>
-        <span>Никакой предоплаты. Я получаю комиссию, когда договор подписан и первый платёж у вас на руках. Не сдам — вы ничего не теряете.</span>
+    <!-- ЭКРАН 4: bento + финальный CTA -->
+    <div class="own-scene own-bento rv">
+      <div class="own-head">
+        <h2>Вы передаёте задачу. Не контроль над квартирой.</h2>
       </div>
-      <a class="btn btn-solid" href="#contact" data-goal="owner">Узнать, за сколько сдам вашу квартиру</a>
+      <div class="bento">
+        <div class="tiltwrap b-a"><div class="oglass bento-card accent tilt">
+          <span class="spot" aria-hidden="true"></span>
+          <div class="money-0 sm"><span>0</span><i>₽</i></div>
+          <div class="b-a-txt">
+            <h3>Комиссия для собственника</h3>
+            <p>Услуги оплачивает арендатор.</p>
+          </div>
+        </div></div>
+        <div class="bento-row">
+          <div class="tiltwrap"><div class="oglass bento-card tilt">
+            <span class="spot" aria-hidden="true"></span>
+            <h3>Понятная цена</h3>
+            <p>Вы понимаете, почему квартира выходит на рынок именно с такой ставкой.</p>
+          </div></div>
+          <div class="tiltwrap"><div class="oglass bento-card tilt">
+            <span class="spot" aria-hidden="true"></span>
+            <h3>Меньше лишних показов</h3>
+            <p>Сначала уточняются условия и только потом организуется просмотр.</p>
+          </div></div>
+          <div class="tiltwrap"><div class="oglass bento-card tilt">
+            <span class="spot" aria-hidden="true"></span>
+            <h3>Все решения за вами</h3>
+            <p>Матвей организует процесс, но финальный выбор арендатора остаётся за собственником.</p>
+          </div></div>
+          <div class="tiltwrap"><div class="oglass bento-card tilt">
+            <span class="spot" aria-hidden="true"></span>
+            <h3>До передачи ключей</h3>
+            <p>Сопровождение не заканчивается после публикации объявления.</p>
+          </div></div>
+        </div>
+        <div class="tiltwrap b-f"><div class="oglass final-card tilt">
+          <span class="spot" aria-hidden="true"></span>
+          <h3>Хотите понять, за сколько можно сдать вашу квартиру?</h3>
+          <p>Пришлите район, количество комнат и несколько фотографий. Матвей предварительно оценит объект и подскажет, с чего лучше начать.</p>
+          <div class="final-actions">
+            <a class="btn btn-gold" href="#contact" data-goal="owner">Получить предварительную оценку</a>
+            <a class="btn btn-lite" href="https://wa.me/79916182594" target="_blank" rel="noopener">Написать в WhatsApp</a>
+          </div>
+          <span class="final-fine">Без обязательств. Сначала разберём объект и задачу.</span>
+        </div></div>
+      </div>
     </div>
+
   </div>
 </section>
 
@@ -1126,30 +1337,6 @@ footer .caption{color:#6b7280}
     <div class="rev-nav">
       <button class="rnav" id="rPrev" aria-label="Предыдущий отзыв"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M11 4 6 9l5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
       <button class="rnav" id="rNext" aria-label="Следующий отзыв"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="m7 4 5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    </div>
-  </div>
-</section>
-
-<!-- ПРИНЦИПЫ -->
-<section class="principles" id="principles">
-  <div class="container">
-    <div class="rv sec-head">
-      <span class="eyebrow">Как я работаю</span>
-      <h2>Три вещи, которые я говорю до старта, а не после</h2>
-    </div>
-    <div class="p-grid">
-      <div class="principle rv">
-        <h3>Что входит</h3>
-        <p>Оценка, фото, реклама на всех площадках, показы, проверка кандидатов, договор, передача ключей и опись имущества. Список фиксируем письменно — «допуслуг по ходу» не бывает.</p>
-      </div>
-      <div class="principle rv">
-        <h3>Сколько стоит</h3>
-        <p>Комиссия называется в первом разговоре и фиксируется до старта. Для собственников подбор жильца — без предоплаты: я получаю оплату по факту подписанного договора.</p>
-      </div>
-      <div class="principle rv">
-        <h3>Что если не получится</h3>
-        <p>Средний срок сдачи — 7 дней. Если за 14 дней квартира не сдана — вместе пересматриваем цену и стратегию, а не кормлю обещаниями «на следующей неделе».</p>
-      </div>
     </div>
   </div>
 </section>
@@ -1554,6 +1741,166 @@ document.querySelectorAll('[data-goal]').forEach(btn => {
     setTimeout(()=>{ if(!done) finish(); }, isMobileIntro ? 2300 : 6500); }
   if(document.fonts && document.fonts.ready){ document.fonts.ready.then(()=>setTimeout(start,100)); }
   setTimeout(start, 700);
+})();
+
+/* ====== РАЗДЕЛ «Я СОБСТВЕННИК»: интерактив ====== */
+(function(){
+  const owner = document.getElementById('owner');
+  if(!owner) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fmt = n => Math.round(n).toLocaleString('ru-RU');
+
+  /* --- Калькулятор простоя --- */
+  (function(){
+    const range = document.getElementById('calcRange');
+    if(!range) return;
+    const val = document.getElementById('calcVal');
+    const week = document.getElementById('calcWeek');
+    const month = document.getElementById('calcMonth');
+    const min = +range.min, max = +range.max;
+    function upd(){
+      const rent = +range.value;
+      val.textContent = fmt(rent) + ' ₽';
+      week.textContent  = '−' + fmt(rent/4) + ' ₽';
+      month.textContent = '−' + fmt(rent) + ' ₽';
+      range.style.setProperty('--fill', ((rent-min)/(max-min)*100) + '%');
+    }
+    range.addEventListener('input', upd);
+    upd();
+  })();
+
+  /* --- Экран 2: переключатель сравнения --- */
+  (function(){
+    const sw = document.getElementById('cmpSwitch');
+    const card = document.getElementById('cmpCard');
+    const list = document.getElementById('cmpList');
+    if(!sw || !card || !list) return;
+    const DATA = {
+      self: [
+        ['Цена на глаз','Завышенная ставка уменьшает спрос. Заниженная — сокращает доход.'],
+        ['Обычные фотографии','Объект может проиграть конкурентам ещё до прочтения объявления.'],
+        ['Ответы после работы','Заинтересованный арендатор может выбрать другую квартиру, пока ждёт ответа.'],
+        ['Все кандидаты подряд','Десятки сообщений превращаются в лишние показы и потерянное время.'],
+        ['Шаблонный договор','Универсальный документ не всегда учитывает условия конкретной квартиры.']
+      ],
+      matvey: [
+        ['Анализ рынка','Цена определяется по реальным конкурентам, району, состоянию квартиры и текущему спросу.'],
+        ['Сильная упаковка','Фото, описание и позиционирование помогают заинтересованному арендатору быстрее принять решение.'],
+        ['Быстрая коммуникация','Обращения обрабатываются системно, без потери подходящих кандидатов.'],
+        ['Предварительный отбор','До просмотра уточняются сроки, состав жильцов, бюджет, животные и важные условия.'],
+        ['Согласованные условия','Ключевые договорённости обсуждаются и фиксируются до передачи квартиры.']
+      ]
+    };
+    function render(side){
+      list.innerHTML = DATA[side].map((r,i)=>
+        '<div class="cmp-row"><span class="cmp-num">'+String(i+1).padStart(2,'0')+'</span>'+
+        '<div><h4>'+r[0]+'</h4><p>'+r[1]+'</p></div></div>').join('');
+    }
+    let side = 'self';
+    render(side);
+    function setSide(next){
+      if(next === side) return;
+      side = next;
+      sw.dataset.side = side; card.dataset.side = side;
+      sw.querySelectorAll('.cmp-btn').forEach(b=>{
+        const on = b.dataset.cmp === side;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on);
+      });
+      if(reduce){ render(side); return; }
+      list.classList.add('swapping');
+      setTimeout(()=>{ render(side); requestAnimationFrame(()=>list.classList.remove('swapping')); }, 320);
+    }
+    sw.querySelectorAll('.cmp-btn').forEach(b=> b.addEventListener('click', ()=> setSide(b.dataset.cmp)));
+  })();
+
+  /* --- Экран 3: маршрут сдачи --- */
+  (function(){
+    const track = document.getElementById('routeTrack');
+    const body = document.getElementById('rtBody');
+    const numEl = document.getElementById('rtNum');
+    const titleEl = document.getElementById('rtTitle');
+    const textEl = document.getElementById('rtText');
+    const bar = document.getElementById('rtBar');
+    if(!track || !body) return;
+    const STAGES = [
+      ['Оценка','Определяем ставку, которая сохраняет доход собственника и соответствует реальному спросу.'],
+      ['Упаковка','Подготавливаем подачу квартиры: фотографии, описание и понятные условия.'],
+      ['Обращения','Быстро отвечаем кандидатам и не теряем заинтересованных арендаторов.'],
+      ['Отбор','До просмотра уточняем важные условия и отсеиваем неподходящие обращения.'],
+      ['Показы','Организуем встречи без необходимости собственнику постоянно менять свои планы.'],
+      ['Переговоры','Помогаем согласовать условия спокойно и без давления на стороны.'],
+      ['Договор','Фиксируем ключевые договорённости перед передачей квартиры.'],
+      ['Ключи','Сопровождаем процесс до подписания и передачи объекта.']
+    ];
+    let cur = 0, timer = null, hover = false;
+    track.innerHTML = STAGES.map((s,i)=>
+      '<button class="rt-stage'+(i===0?' active':'')+'" type="button" role="tab" data-i="'+i+'">'+
+      '<span class="rn">'+String(i+1).padStart(2,'0')+'</span><span class="rl">'+s[0]+'</span></button>').join('');
+    const stageEls = [...track.querySelectorAll('.rt-stage')];
+    function paint(i){
+      numEl.textContent = String(i+1).padStart(2,'0');
+      titleEl.textContent = STAGES[i][0];
+      textEl.textContent = STAGES[i][1];
+      bar.style.width = ((i+1)/STAGES.length*100) + '%';
+    }
+    function centerStage(el){
+      // подкручиваем ТОЛЬКО ленту этапов по горизонтали — страница не прыгает
+      const left = track.scrollLeft + el.getBoundingClientRect().left - track.getBoundingClientRect().left - (track.clientWidth - el.clientWidth)/2;
+      track.scrollTo({left: Math.max(0, left), behavior: reduce ? 'auto' : 'smooth'});
+    }
+    function setStage(i){
+      cur = i;
+      stageEls.forEach((el,idx)=> el.classList.toggle('active', idx===i));
+      centerStage(stageEls[i]);
+      if(reduce){ paint(i); return; }
+      body.classList.add('out');
+      setTimeout(()=>{ paint(i); requestAnimationFrame(()=>body.classList.remove('out')); }, 300);
+    }
+    paint(0);
+    function tick(){ if(!hover) setStage((cur + 1) % STAGES.length); }
+    function play(){ if(reduce || timer) return; timer = setInterval(tick, 3600); }
+    function restart(){ if(timer){ clearInterval(timer); timer = null; } play(); }
+    // клик по этапу — перейти и продолжить автопрогон с этого места
+    stageEls.forEach(el=> el.addEventListener('click', ()=>{ setStage(+el.dataset.i); restart(); }));
+    // на десктопе пауза при наведении (чтобы прочитать); на телефоне идёт само
+    const routeEl = document.getElementById('route');
+    if(routeEl){
+      routeEl.addEventListener('mouseenter', ()=>{ hover = true; });
+      routeEl.addEventListener('mouseleave', ()=>{ hover = false; });
+    }
+    // этапы идут сами по кругу; лента подкручивается только по горизонтали
+    play();
+  })();
+
+  /* --- Стекло: 3D-tilt + курсорный блик (только для мыши) --- */
+  (function(){
+    const fine = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+    if(!fine || reduce) return;
+    const MAX = 6;
+    owner.querySelectorAll('.tilt').forEach(card=>{
+      let raf = 0, nx = 0, ny = 0;
+      card.addEventListener('pointermove', e=>{
+        const r = card.getBoundingClientRect();
+        nx = (e.clientX - r.left) / r.width;
+        ny = (e.clientY - r.top) / r.height;
+        if(raf) return;
+        raf = requestAnimationFrame(()=>{
+          raf = 0;
+          card.classList.add('tilting');
+          card.style.setProperty('--ry', ((nx-0.5)*2*MAX).toFixed(2)+'deg');
+          card.style.setProperty('--rx', (-(ny-0.5)*2*MAX).toFixed(2)+'deg');
+          card.style.setProperty('--mx', (nx*100).toFixed(1)+'%');
+          card.style.setProperty('--my', (ny*100).toFixed(1)+'%');
+        });
+      });
+      card.addEventListener('pointerleave', ()=>{
+        card.classList.remove('tilting');
+        card.style.setProperty('--rx','0deg');
+        card.style.setProperty('--ry','0deg');
+      });
+    });
+  })();
 })();
 
 </script>
