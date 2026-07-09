@@ -846,6 +846,8 @@ header{
 .ts-title{font-size:20px;font-weight:800;line-height:1.18;color:var(--ink)}
 .ts-status{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:7px 10px;border-radius:999px;background:rgba(15,107,87,.08);border:1px solid rgba(15,107,87,.12);color:var(--emerald);font-size:12px;font-weight:800;white-space:nowrap}
 .ts-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 0 5px rgba(15,107,87,.1)}
+.tenant-stage.ts-changing .ts-title,.tenant-stage.ts-changing .ts-status{animation:tsTextIn .42s cubic-bezier(.2,.8,.25,1)}
+@keyframes tsTextIn{from{opacity:.35;transform:translateY(6px)}to{opacity:1;transform:none}}
 .ts-progress{height:4px;border-radius:999px;background:rgba(15,107,87,.09);overflow:hidden;flex:none}
 .ts-progress i{display:block;height:100%;width:16.666%;border-radius:inherit;background:linear-gradient(90deg,var(--emerald),#55B093);transition:width .55s cubic-bezier(.2,.8,.25,1)}
 .tenant-stage[data-step="2"] .ts-progress i{width:33.333%}.tenant-stage[data-step="3"] .ts-progress i{width:50%}.tenant-stage[data-step="4"] .ts-progress i{width:66.666%}.tenant-stage[data-step="5"] .ts-progress i{width:83.333%}.tenant-stage[data-step="6"] .ts-progress i{width:100%}
@@ -862,7 +864,11 @@ header{
 .ts-terms{display:grid;grid-template-columns:1fr 1fr;gap:10px}.ts-term{padding:14px;border-radius:16px;background:#fff;border:1px solid rgba(221,214,203,.78)}.ts-term span{display:block;font-size:12px;color:#7a8490;margin-bottom:2px}.ts-term b{font-size:16px;color:var(--ink)}.ts-note{margin-top:auto;font-size:14px;line-height:1.45;color:#4b5563;background:rgba(15,107,87,.07);border:1px solid rgba(15,107,87,.12);border-radius:16px;padding:12px 14px}
 .ts-route{display:grid;gap:12px;margin:auto 0}.ts-route-row{display:grid;grid-template-columns:62px 1fr;gap:12px;align-items:center;padding:14px;border-radius:18px;background:#fff;border:1px solid rgba(221,214,203,.78);box-shadow:0 12px 26px rgba(28,36,48,.05)}.ts-route-row time{font-size:15px;font-weight:800;color:var(--brass);font-variant-numeric:tabular-nums}.ts-route-row span{font-weight:700;color:var(--ink)}
 .ts-checks{display:grid;gap:10px;margin:auto 0}.ts-check{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;background:#fff;border:1px solid rgba(221,214,203,.78);font-size:14.5px;color:#3f4a57}.ts-check i{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(15,107,87,.1);color:var(--emerald);font-style:normal;font-weight:900;flex:none}.ts-final{margin:auto 0;display:grid;gap:12px}.ts-final .ts-check{font-weight:700}.ts-keyline{height:1px;background:linear-gradient(90deg,transparent,var(--brass),transparent);margin:2px 0}.ts-finale{font-size:15px;line-height:1.45;color:var(--ink);font-weight:700;text-align:center;padding:12px;border-radius:16px;background:rgba(185,138,68,.1);border:1px solid rgba(185,138,68,.22)}
-.ts-dots{display:flex;gap:7px;justify-content:center}.ts-dot{width:7px;height:7px;border-radius:50%;border:0;background:rgba(15,107,87,.18);padding:0;transition:width .25s,background .25s}.tenant-stage[data-step="1"] .ts-dot:nth-child(1),.tenant-stage[data-step="2"] .ts-dot:nth-child(2),.tenant-stage[data-step="3"] .ts-dot:nth-child(3),.tenant-stage[data-step="4"] .ts-dot:nth-child(4),.tenant-stage[data-step="5"] .ts-dot:nth-child(5),.tenant-stage[data-step="6"] .ts-dot:nth-child(6){width:22px;border-radius:999px;background:var(--emerald)}
+.ts-controls{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ts-nav{width:36px;height:36px;border-radius:50%;border:1px solid rgba(15,107,87,.14);background:rgba(255,255,255,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(28,36,48,.08);transition:transform .2s,background .2s,border-color .2s,color .2s}
+.ts-nav:hover,.ts-nav:focus-visible{background:rgba(15,107,87,.08);border-color:rgba(15,107,87,.28);color:var(--emerald);outline:none;transform:translateY(-1px)}
+.ts-nav:active{transform:scale(.96)}
+.ts-dots{display:flex;gap:7px;justify-content:center;align-items:center}.ts-dot{width:8px;height:8px;border-radius:50%;border:0;background:rgba(15,107,87,.18);padding:0;cursor:pointer;transition:width .25s,background .25s,box-shadow .25s}.tenant-stage[data-step="1"] .ts-dot:nth-child(1),.tenant-stage[data-step="2"] .ts-dot:nth-child(2),.tenant-stage[data-step="3"] .ts-dot:nth-child(3),.tenant-stage[data-step="4"] .ts-dot:nth-child(4),.tenant-stage[data-step="5"] .ts-dot:nth-child(5),.tenant-stage[data-step="6"] .ts-dot:nth-child(6){width:24px;border-radius:999px;background:var(--emerald);box-shadow:0 0 0 4px rgba(15,107,87,.1)}
 .tenant-section{margin-top:clamp(42px,6vw,72px)}
 .tenant-head{margin-bottom:22px;text-align:center}
 .tenant-head h3{font-size:clamp(24px,3vw,34px);color:var(--ink);text-wrap:balance}
@@ -902,12 +908,12 @@ header{
 @media(max-width:600px){
   .track-tenant{padding:44px 0}.tenant-copy h2{font-size:clamp(27px,7.4vw,34px);line-height:1.08}.tenant-lead{font-size:15px;line-height:1.55}
   .tenant-flow{display:grid;grid-template-columns:1fr;gap:8px}.flow-pill{justify-content:center;white-space:normal;text-align:center}.flow-arrow{display:none}
-  .tenant-hero .btn,.tenant-final .btn{width:100%;justify-content:center}.tenant-card{padding:18px;border-radius:22px}.tenant-stage{min-height:432px;padding:14px}.ts-head{gap:10px}.ts-title{font-size:17px}.ts-status{font-size:11px;padding:6px 8px;white-space:normal;text-align:left}.ts-screen{min-height:298px;border-radius:18px}.ts-panel{padding:12px;gap:10px}.ts-query,.ts-terms{grid-template-columns:1fr}.ts-chip,.ts-term{padding:10px}.ts-flat{grid-template-columns:40px 1fr;gap:9px;padding:10px}.ts-mark{grid-column:2;justify-self:start}.ts-photo{height:38px}.ts-route-row{grid-template-columns:54px 1fr;padding:11px}.ts-check{padding:10px;font-size:13.5px}
+  .tenant-hero .btn,.tenant-final .btn{width:100%;justify-content:center}.tenant-card{padding:18px;border-radius:22px}.tenant-stage{min-height:432px;padding:14px}.ts-head{gap:10px}.ts-title{font-size:17px}.ts-status{font-size:11px;padding:6px 8px;white-space:normal;text-align:left}.ts-screen{min-height:298px;border-radius:18px}.ts-panel{padding:12px;gap:10px}.ts-query,.ts-terms{grid-template-columns:1fr}.ts-chip,.ts-term{padding:10px}.ts-flat{grid-template-columns:40px 1fr;gap:9px;padding:10px}.ts-mark{grid-column:2;justify-self:start}.ts-photo{height:38px}.ts-route-row{grid-template-columns:54px 1fr;padding:11px}.ts-check{padding:10px;font-size:13.5px}.ts-nav{width:34px;height:34px}
   .tenant-section{margin-top:38px}.tenant-head{text-align:left}.tenant-head h3{font-size:24px}.tenant-head p{font-size:15px}
   .t-benefit{padding:18px}.tenant-path{grid-template-columns:1fr}.path-step{min-height:auto;padding:18px}.path-num{margin-bottom:12px}
   .tcmp{padding:20px 18px}.tenant-final{padding:26px 18px}.tenant-final h3{font-size:24px}
 }
-@media (prefers-reduced-motion:reduce){.t-benefit,.ts-progress i,.ts-panel,.ts-flat,.ts-dot{transition:none}}
+@media (prefers-reduced-motion:reduce){.t-benefit,.ts-progress i,.ts-panel,.ts-flat,.ts-dot,.ts-nav{transition:none}.tenant-stage.ts-changing .ts-title,.tenant-stage.ts-changing .ts-status{animation:none}}
 /* два пространства: переключатель */
 .spaces-bar{padding:34px 0 6px;position:sticky;top:112px;z-index:40}
 .mode-switch{
@@ -1365,7 +1371,7 @@ footer .caption{color:#6b7280}
         </div>
         <a class="btn btn-solid" href="#contact" data-goal="tenant">Подобрать квартиру</a>
       </div>
-      <div class="tenant-card tenant-stage" id="tenantStage" data-step="1" aria-live="polite">
+      <div class="tenant-card tenant-stage" id="tenantStage" data-step="1" tabindex="0" aria-label="Анимированная сцена подбора квартиры" aria-live="polite">
         <div class="ts-head">
           <div><span class="ts-kicker">Подбор под ключ</span><div class="ts-title" id="tsTitle">Заявка получена</div></div>
           <span class="ts-status" id="tsStatus">Получил ваш запрос</span>
@@ -1423,7 +1429,18 @@ footer .caption{color:#6b7280}
             </div>
           </div>
         </div>
-        <div class="ts-dots" aria-hidden="true"><span class="ts-dot"></span><span class="ts-dot"></span><span class="ts-dot"></span><span class="ts-dot"></span><span class="ts-dot"></span><span class="ts-dot"></span></div>
+        <div class="ts-controls">
+          <button class="ts-nav ts-prev" type="button" aria-label="Предыдущий этап">←</button>
+          <div class="ts-dots" role="tablist" aria-label="Этапы подбора квартиры">
+            <button class="ts-dot" role="tab" type="button" data-step-target="1" aria-label="Этап 1: Заявка получена"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="2" aria-label="Этап 2: Формирую подборку"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="3" aria-label="Этап 3: Согласовываю условия"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="4" aria-label="Этап 4: Организую показы"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="5" aria-label="Этап 5: Проверяю квартиру и документы"></button>
+            <button class="ts-dot" role="tab" type="button" data-step-target="6" aria-label="Этап 6: Договор и ключи"></button>
+          </div>
+          <button class="ts-nav ts-next" type="button" aria-label="Следующий этап">→</button>
+        </div>
       </div>
     </div>
 
@@ -1793,49 +1810,106 @@ document.querySelectorAll('[data-goal]').forEach(btn => {
   });
 });
 
-/* Hero-сцена арендатора: короткий премиальный цикл процесса */
+/* Hero-сцена арендатора: автоматический цикл + ручное управление */
 (function(){
   const stage = document.getElementById('tenantStage');
   if (!stage) return;
   const title = document.getElementById('tsTitle');
   const status = document.getElementById('tsStatus');
+  const screen = stage.querySelector('.ts-screen');
+  const prev = stage.querySelector('.ts-prev');
+  const nextBtn = stage.querySelector('.ts-next');
+  const dots = Array.from(stage.querySelectorAll('.ts-dot'));
+  if (!title || !status || !screen || !prev || !nextBtn || dots.length !== 6) return;
+
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const intervalMs = 3300;
+  const resumeDelayMs = 5000;
   const steps = [
     ['Заявка получена', 'Получил ваш запрос'],
-    ['Формирую подборку', 'Проверяю актуальность объявлений'],
-    ['Формирую подборку', 'Связываюсь с собственниками'],
     ['Формирую подборку', 'Отсеиваю неподходящие варианты'],
     ['Согласовываю условия', 'Все условия известны заранее'],
     ['Организую показы', 'Собираю показы в один удобный маршрут'],
     ['Проверяю квартиру и документы', 'Проверяю важные детали'],
     ['Договор и ключи', 'Сопровождаю до получения ключей']
   ];
-  const viewByIndex = [1,2,2,2,3,4,5,6];
-  let idx = 0, timer = null, paused = false;
-  function render(){
-    const view = viewByIndex[idx];
-    stage.dataset.step = String(view);
-    stage.dataset.sub = idx === 3 ? 'reject' : '';
+  let idx = 0;
+  let timer = null;
+  let resumeTimer = null;
+  let hoverPaused = false;
+  let hiddenPaused = document.hidden;
+  let pointerStart = null;
+
+  function stopTimer(){
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+  function clearResume(){
+    if (resumeTimer) { clearTimeout(resumeTimer); resumeTimer = null; }
+  }
+  function canAuto(){ return !reduce && !hoverPaused && !hiddenPaused; }
+  function startTimer(){
+    stopTimer();
+    if (canAuto()) timer = setInterval(() => setStep(idx + 1), intervalMs);
+  }
+  function scheduleResume(){
+    clearResume();
+    stopTimer();
+    if (!reduce) resumeTimer = setTimeout(startTimer, resumeDelayMs);
+  }
+  function setStep(nextIndex, manual){
+    idx = (nextIndex + steps.length) % steps.length;
+    const stepNumber = idx + 1;
+    stage.classList.remove('ts-changing');
+    void stage.offsetWidth;
+    stage.classList.add('ts-changing');
+    stage.dataset.step = String(stepNumber);
+    stage.dataset.sub = stepNumber === 2 ? 'reject' : '';
     title.textContent = steps[idx][0];
     status.textContent = steps[idx][1];
+    dots.forEach((dot, i) => {
+      const active = i === idx;
+      dot.setAttribute('aria-selected', active ? 'true' : 'false');
+      dot.tabIndex = active ? 0 : -1;
+    });
+    window.setTimeout(() => stage.classList.remove('ts-changing'), 420);
+    if (manual) scheduleResume();
   }
-  function next(){
-    if (paused) return;
-    idx = (idx + 1) % steps.length;
-    render();
-  }
-  render();
-  if (reduce) return;
-  timer = setInterval(next, 2400);
-  function setPaused(on){ paused = on; }
-  stage.addEventListener('mouseenter', () => setPaused(true));
-  stage.addEventListener('mouseleave', () => setPaused(false));
-  stage.addEventListener('focusin', () => setPaused(true));
-  stage.addEventListener('focusout', () => setPaused(false));
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden && timer) { clearInterval(timer); timer = null; }
-    else if (!document.hidden && !timer) { timer = setInterval(next, 2400); }
+  function go(delta, manual){ setStep(idx + delta, manual); }
+
+  prev.addEventListener('click', () => go(-1, true));
+  nextBtn.addEventListener('click', () => go(1, true));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => setStep(i, true)));
+  stage.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1, true); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(1, true); }
   });
+
+  screen.addEventListener('mouseenter', () => { hoverPaused = true; stopTimer(); clearResume(); });
+  screen.addEventListener('mouseleave', () => { hoverPaused = false; startTimer(); });
+
+  screen.addEventListener('pointerdown', e => {
+    if (e.pointerType === 'mouse') return;
+    pointerStart = {x:e.clientX, y:e.clientY, id:e.pointerId};
+  });
+  screen.addEventListener('pointerup', e => {
+    if (!pointerStart || pointerStart.id !== e.pointerId) return;
+    const dx = e.clientX - pointerStart.x;
+    const dy = e.clientY - pointerStart.y;
+    pointerStart = null;
+    if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.35) {
+      go(dx < 0 ? 1 : -1, true);
+    }
+  });
+  screen.addEventListener('pointercancel', () => { pointerStart = null; });
+
+  document.addEventListener('visibilitychange', () => {
+    hiddenPaused = document.hidden;
+    if (hiddenPaused) { stopTimer(); clearResume(); }
+    else startTimer();
+  });
+
+  setStep(0, false);
+  startTimer();
 })();
 
 /* ====== ИНТРО: VAPORIZE TEXT (адаптация 21st) ====== */
