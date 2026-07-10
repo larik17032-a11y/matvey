@@ -1,0 +1,62 @@
+name: Deploy to Yandex Object Storage
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-yandex-object-storage
+  cancel-in-progress: false
+
+env:
+  YC_ENDPOINT: https://storage.yandexcloud.net
+  YC_REGION: ru-central1
+  YC_BUCKET: elkhin-realty.ru
+  SITE_URL: https://elkhin-realty.ru
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Собираем чистую папку только с файлами сайта, чтобы служебные
+      # файлы репозитория (.git, .github, .claude, .DS_Store, CNAME,
+      # .nojekyll и т.д.) заведомо не могли попасть в бакет — ни при
+      # заливке новых файлов, ни при удалении устаревших через --delete.
+      - name: Prepare site files for deploy
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          mkdir -p dist
+          cp index.html dist/index.html
+          if [ -d assets ]; then
+            cp -R assets dist/assets
+          fi
+          echo "Файлы, которые уйдут в бакет:"
+          find dist -type f | sort
+
+      - name: Sync files to Yandex Object Storage
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ${{ env.YC_REGION }}
+        run: |
+          set -euo pipefail
+          aws s3 sync dist/ "s3://${YC_BUCKET}" \
+            --endpoint-url "${YC_ENDPOINT}" \
+            --region "${YC_REGION}" \
+            --delete \
+            --no-progress
+
+      - name: Verify site is reachable
+        run: |
+          set -euo pipefail
+          curl -sSf --retry 5 --retry-delay 5 --retry-connrefused \
+            -o /dev/null -w "HTTP %{http_code} — %{url_effective}\n" \
+            "${SITE_URL}"

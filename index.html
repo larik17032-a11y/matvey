@@ -1139,8 +1139,9 @@ footer .caption{color:#6b7280}
 </head>
 <body class="intro-lock">
 <div id="intro" aria-hidden="true">
-  <video class="intro-video" autoplay muted playsinline loop preload="metadata">
-    <source src="assets/matvey-intro.mp4" type="video/mp4">
+  <video class="intro-video" autoplay muted playsinline loop preload="auto">
+    <source src="assets/matvey-intro-mobile.mp4" type="video/mp4" media="(max-width: 819px)">
+    <source src="assets/matvey-intro-desktop.mp4" type="video/mp4">
   </video>
   <div class="intro-overlay" aria-hidden="true"></div>
   <canvas id="introCanvas" width="1000" height="500"></canvas>
