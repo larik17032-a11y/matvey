@@ -1,0 +1,20 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- subtle roofline above the monogram -->
+  <path d="M 70 105 L 200 60 L 330 105" fill="none" stroke="#C9A876" stroke-width="4"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+
+  <!-- M: complete, standalone, symmetric -->
+  <path d="M 90 265 L 90 110 L 150 185 L 210 110 L 210 265" fill="none" stroke="#C9A876"
+        stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Y: complete, separate letter, sitting lower and overlaid across the M's right leg -->
+  <g fill="none" stroke="#C9A876" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 195 150 L 245 225" />
+    <path d="M 295 150 L 245 225" />
+    <path d="M 245 225 L 245 305" />
+  </g>
+
+  <!-- ground line beneath, echoing a foundation -->
+  <line x1="140" y1="335" x2="260" y2="335" stroke="#C9A876" stroke-width="4"
+        stroke-linecap="round" opacity="0.85"/>
+</svg>
