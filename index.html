@@ -1099,6 +1099,9 @@ header{
 footer{padding:32px 0;border-top:1px solid var(--sand)}
 .footer-in{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
 footer .caption{color:#6b7280}
+.footer-legal{display:flex;flex-wrap:wrap;gap:8px 18px;width:100%;padding-top:4px}
+.footer-legal a{color:#6b7280;font-size:13px;text-underline-offset:3px}
+.footer-legal a:hover{color:var(--emerald)}
 
 /* ---------- ревил ---------- */
 .rv{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.25,1)}
@@ -1684,6 +1687,10 @@ footer .caption{color:#6b7280}
       </div>
     </div>
     <p class="caption">Ёлхин Матвей Александрович · риелтор по аренде жилой недвижимости<br>Офис: г. Москва, ул. Бакунинская, 69с1 · работаю по Москве и области · <a href="tel:+79778906866" style="color:inherit">+7 977 890-68-66</a></p>
+    <nav class="footer-legal" aria-label="Правовая информация">
+      <a href="/privacy-policy.html">Политика конфиденциальности</a>
+      <a href="/terms.html">Условия использования</a>
+    </nav>
   </div>
 </footer>
 
@@ -1692,9 +1699,7 @@ footer .caption{color:#6b7280}
    Впиши реальные контакты — всё подхватится само. */
 const CONFIG = {
   telegram: "Makvin_228",
-  whatsapp: "79916182594",
-  telegramBotToken: "",           // опционально: токен бота для приёма заявок
-  telegramChatId: ""              // опционально: chat_id, куда слать заявки
+  whatsapp: "79916182594"
 };
 /* ============================================= */
 
@@ -1754,24 +1759,13 @@ if (rev) {
   document.getElementById('rNext').addEventListener('click', () => rev.scrollBy({left: card(), behavior:'smooth'}));
 }
 
-/* Форма: если задан бот — шлём в Telegram-бот; иначе открываем WhatsApp с готовым текстом */
-document.getElementById('leadForm').addEventListener('submit', async function(e){
+/* Форма не отправляет данные на сайт: она открывает WhatsApp с готовым текстом */
+document.getElementById('leadForm').addEventListener('submit', function(e){
   e.preventDefault();
   const f = new FormData(this);
   const text = "Заявка с сайта\nЗадача: " + f.get('goal') +
                "\nИмя: " + f.get('name') +
                "\nТелефон: " + f.get('phone');
-  if (CONFIG.telegramBotToken && CONFIG.telegramChatId) {
-    try {
-      await fetch("https://api.telegram.org/bot" + CONFIG.telegramBotToken + "/sendMessage", {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify({chat_id: CONFIG.telegramChatId, text})
-      });
-      this.innerHTML = '<p style="text-align:center;font-weight:600;padding:20px 0">Заявка отправлена. Матвей свяжется с вами в течение часа.</p>';
-      return;
-    } catch(err) { /* fallback ниже */ }
-  }
   window.open("https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text), "_blank");
 });
 

@@ -34,7 +34,7 @@ jobs:
           set -euo pipefail
           rm -rf dist
           mkdir -p dist
-          cp index.html dist/index.html
+          cp ./*.html dist/
           if [ -d assets ]; then
             cp -R assets dist/assets
           fi
